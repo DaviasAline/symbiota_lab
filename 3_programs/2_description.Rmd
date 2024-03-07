@@ -1,0 +1,310 @@
+---
+title: "2_description"
+author: "Aline"
+date: '2023-03-10'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,
+	fig.align = "center",
+	message = FALSE,
+	warning = FALSE
+)
+
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# Chargement des packages ----
+library(readxl)
+library(haven)
+library(tidyverse)
+library(lubridate)
+library(gtsummary)
+library(questionr)
+library(mice)
+library(writexl)
+library(gt)
+library(expss)
+source("~/5. R projects/symbiota_lab/3_programs/1_functions.R", encoding = 'UTF-8', echo=TRUE)
+source("~/5. R projects/symbiota_lab/3_programs/0_source_data_reading_cleaning.R", echo=TRUE)
+```
+
+
+# Data evalutation
+## Distribution of the maternal and child caracteristics
+```{r echo=FALSE, fig.height=2, fig.width=8, message=FALSE, warning=FALSE}
+table_descrip_covar <- bdd %>%                        # tableau toutes variables
+  filter(!is.na(trajectory))%>%
+  select(all_of(vec_covar)) %>% 
+  tbl_summary(type = list(GA ~ "continuous", 
+                          Smoke_preg ~ "categorical")) %>% 
+  bold_labels()
+table_descrip_covar_num <- descrip_num(data = bdd, vars = vec_num)   # Tableau détaillé covar num
+
+histogram_descrip_covar <- histogram(data = bdd, vars = vec_covar_num, order_var = vec_covar_num)
+boxplot_descrip_covar <-boxplot(data = bdd, vars = vec_covar_num)
+densityplot_descrip_covar <-densityplot(data = bdd, vars = vec_covar_num)
+
+table_descrip_covar
+histogram_descrip_covar
+boxplot_descrip_covar
+densityplot_descrip_covar
+ggsave(
+  densityplot_descrip_covar, 
+  device = "pdf", 
+  filename= "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/5. R projects/symbiota_lab/4_output/densityplot_descrip_covar.pdf", 
+  units = "cm", 
+  width = 15, 
+  height = 7)
+```
+```{r echo=FALSE, fig.height=13, fig.width=15, message=FALSE, warning=FALSE}
+barplot_descrip_covar <- barplot(data = bdd, vars = vec_covar_cat)
+barplot_descrip_covar
+
+ggsave(
+  barplot_descrip_covar, 
+  device = "pdf", 
+  filename= "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/5. R projects/symbiota_lab/4_output/barplot_descrip_covar.pdf", 
+  units = "cm", 
+  width = 37, 
+  height = 20)
+```
+
+## Distribution of the gut microbiota enterotypes
+```{r echo=FALSE, fig.height=2, fig.width=10, message=FALSE, warning=FALSE}
+table_descrip_gut <- bdd %>%                        # tableau toutes variables
+  select(all_of(vec_expo)) %>% 
+  tbl_summary() %>% 
+  bold_labels()
+barplot_descrip_gut <- barplot(data = bdd, vars = vec_expo)
+
+table_descrip_gut
+barplot_descrip_gut
+```
+
+## Distribution of the gut microbiota metabolites 
+```{r}
+metabolite_vec <- bdd %>% select(starts_with("metabolite")) %>% colnames()
+descrip_num(data = bdd, vars = metabolite_vec)
+
+densityplot(data = bdd, vars = metabolite_vec[1:12])
+boxplot(data = bdd, vars = metabolite_vec[1:12])
+
+densityplot(data = bdd, vars = metabolite_vec[13:24])
+boxplot(data = bdd, vars = metabolite_vec[13:24])
+
+densityplot(data = bdd, vars = metabolite_vec[25:36])
+boxplot(data = bdd, vars = metabolite_vec[25:36])
+
+densityplot(data = bdd, vars = metabolite_vec[37:48])
+boxplot(data = bdd, vars = metabolite_vec[37:48])
+
+densityplot(data = bdd, vars = metabolite_vec[49:60])
+boxplot(data = bdd, vars = metabolite_vec[49:60])
+
+densityplot(data = bdd, vars = metabolite_vec[61:72])
+boxplot(data = bdd, vars = metabolite_vec[61:72])
+
+```
+
+
+## Distribution of Secretory IgA levels 
+```{r echo=FALSE, fig.height=3, fig.width=5, message=FALSE, warning=FALSE}
+table_descrip_IgA <- bdd %>%                        # tableau toutes variables
+  select("sIgA_3m", "sIgA_12mo", "sIgA_3m_cat", "sIgA_12mo_cat") %>% 
+  tbl_summary() %>% 
+  bold_labels() %>%
+  add_n()
+table_descrip_IgA_num <- descrip_num(data = bdd, vars = vec_mediator)   # Tableau détaillé covar num
+
+barplot_descrip_IgA <- barplot(data = bdd, vars = c("sIgA_3m_cat", "sIgA_12mo_cat"))
+
+histogram_descrip_IgA <- histogram(data = bdd, vars = vec_mediator, order_var = vec_mediator)
+boxplot_descrip_IgA <-boxplot(data = bdd, vars = vec_mediator)
+densityplot_descrip_IgA <-densityplot(data = bdd, vars = vec_mediator)
+
+histogram_descrip_IgA_ln <- histogram(data = bdd, vars = vec_mediator_ln, order_var = vec_mediator_ln)
+boxplot_descrip_IgA_ln <-boxplot(data = bdd, vars = vec_mediator_ln)
+densityplot_descrip_IgA_ln <-densityplot(data = bdd, vars = vec_mediator_ln)
+
+
+
+table_descrip_IgA
+barplot_descrip_IgA
+histogram_descrip_IgA
+boxplot_descrip_IgA
+densityplot_descrip_IgA
+
+histogram_descrip_IgA_ln
+boxplot_descrip_IgA_ln
+densityplot_descrip_IgA_ln
+```
+
+## Distribution of Bayley scores 
+```{r echo=FALSE, fig.height=5, fig.width=8, message=FALSE, warning=FALSE}
+table_descrip_neuro <- bdd %>%                        # tableau toutes variables
+  select(all_of(vec_outcome)) %>% 
+  tbl_summary() %>% 
+  bold_labels()
+table_descrip_neuro_num <- descrip_num(data = bdd, vars = vec_outcome)   # Tableau détaillé covar num
+
+#barplot_descrip_neuro <- barplot(data = bdd, vars = )
+histogram_descrip_neuro <- histogram(data = bdd, vars = vec_outcome, order_var = vec_outcome)
+boxplot_descrip_neuro <-boxplot(data = bdd, vars = vec_outcome)
+densityplot_descrip_neuro <-densityplot(data = bdd, vars = vec_outcome)
+
+table_descrip_neuro_num
+#barplot_descrip_neuro
+histogram_descrip_neuro
+boxplot_descrip_neuro
+densityplot_descrip_neuro
+```
+
+## Correlations between the continuous variables 
+```{r echo=FALSE, fig.height=15, fig.width=15, message=FALSE, warning=FALSE}
+cormat <- bdd %>% select(all_of(vec_covar_num), all_of(vec_mediator), all_of(vec_outcome)) 
+cormat <- round(cor(cormat, 
+                      use = "pairwise.complete.obs", 
+                      method = "spearman"), 2)
+cormat
+```
+
+## Missing data and sample size evaluation 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+sample_size_1 <- bdd %>% 
+  select(all_of(vec_expo), all_of(vec_mediator)) %>% 
+  md.pattern(plot = FALSE) 
+
+sample_size_2 <- bdd %>% 
+  filter(!is.na(trajectory)) %>%
+  select(all_of(vec_mediator), all_of(vec_outcome)) %>% 
+  md.pattern(plot = FALSE)  
+
+sample_size_3 <- bdd %>% 
+  select(all_of(vec_expo), all_of(vec_outcome)) %>% 
+  md.pattern(plot = FALSE)
+
+sample_size_4 <- bdd %>% 
+  select(all_of(vec_expo), all_of(vec_mediator), all_of(vec_outcome)) %>% 
+  md.pattern(plot = FALSE)
+
+sample_size_1
+sample_size_2
+sample_size_3
+sample_size_4
+
+
+```
+
+## Outliers evaluation
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+outliers(bdd, sIgA_3m_ln)
+outliers(bdd, sIgA_12mo_ln)
+```
+
+# Data description
+## Maternal and child characteristics depending on gut microbiota enterotypes 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+t1 <- bdd %>%
+  filter(!is.na(Cluster_3M)) %>%
+  select(all_of(vec_covar), Cluster_3M) %>%
+  tbl_summary(by = Cluster_3M, 
+              type = list(GA ~ "continuous", 
+                          Smoke_preg ~ "categorical")) %>%
+  add_overall() %>%
+  add_p() %>%
+  bold_labels() %>%
+  bold_p()
+
+t2 <- bdd %>%
+  filter(!is.na(Cluster_12M)) %>%
+  select(all_of(vec_covar), Cluster_12M) %>%
+  tbl_summary(by = Cluster_12M, 
+              type = list(GA ~ "continuous",
+                          Smoke_preg ~ "categorical")) %>%
+  add_p() %>%
+  bold_labels()%>%
+  bold_p()
+
+t3 <- bdd %>%
+  filter(!is.na(trajectory)) %>%
+  select(all_of(vec_covar), trajectory) %>%
+  tbl_summary(by = trajectory, 
+               type = list(GA ~ "continuous",
+                          Smoke_preg ~ "categorical")) %>%
+  add_p() %>%
+  bold_labels()%>%
+  bold_p()
+
+table_covar_gut <- tbl_merge(
+  tbls = list(t1, t2, t3), 
+  tab_spanner = c("Clusters at 3 months", "Clusters at 12 months", "Trajectory"))
+
+table_covar_gut 
+```
+
+## Maternal and child characteristics distribution and gut microbiota enterotypes depending on IgA levels
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+t4 <- bdd %>%
+  filter(!is.na(trajectory)) %>%
+  select(all_of(vec_covar), all_of(vec_expo), sIgA_3m_cat) %>%
+  tbl_summary(by = sIgA_3m_cat,
+                 type = list(GA ~ "continuous",
+                             Smoke_preg ~ "categorical")) %>%
+  add_overall() %>%
+  add_p() %>%
+  bold_labels()%>%
+  bold_p()
+
+t5 <- bdd %>%
+  filter(!is.na(trajectory)) %>%
+  select(all_of(vec_covar), all_of(vec_expo), sIgA_12mo_cat) %>%
+  tbl_summary(by = sIgA_12mo_cat,
+                 type = list(GA ~ "continuous",
+                             Smoke_preg ~ "categorical")) %>%
+  add_p() %>%
+  bold_labels()%>%
+  bold_p()
+
+table_covar_gut_IgA <- tbl_merge(
+  tbls = list(t4, t5), 
+  tab_spanner = c("IgA at 3 months", "IgA at 12 months"))
+
+table_covar_gut_IgA
+```
+
+## Maternal and child characteristics distribution, gut microbiota enterotypes and serun IgA levels depending on Bayley score
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+t6 <- bdd %>%
+  filter(!is.na(trajectory)) %>%
+  select(all_of(vec_covar), all_of(vec_expo), all_of(vec_mediator), sIgA_3m_cat, sIgA_12mo_cat) %>%
+  tbl_summary(by = xxx,
+                 type = list(GA ~ "continuous",
+                             Smoke_preg ~ "categorical")) %>%
+  add_overall() %>%
+  add_p() %>%
+  bold_labels()%>%
+  bold_p()
+
+t7 <- bdd %>%
+  filter(!is.na(trajectory)) %>%
+  select(all_of(vec_covar), all_of(vec_expo), all_of(vec_mediator), sIgA_3m_cat, sIgA_12mo_cat) %>%
+  tbl_summary(by = xxx,
+                 type = list(GA ~ "continuous",
+                             Smoke_preg ~ "categorical")) %>%
+  add_p() %>%
+  bold_labels()%>%
+  bold_p()
+
+table_covar_gut_IgA_neuro <- tbl_merge(
+  tbls = list(t6, t7), 
+  tab_spanner = c("Bayley score at 1 year", "Bayley score at 2 years"))
+
+table_covar_gut_IgA_neuro
+```
