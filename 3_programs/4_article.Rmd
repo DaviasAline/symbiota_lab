@@ -2746,12 +2746,24 @@ Mediation main results
 
 ```
 
-
 # Figure S1
-Heatmap of correlation between the sIgA level at 3 months, the gut microbiota at 3 and 12 months and the Bayley cognitive scale at 12 and 24 months of age in the children from the Canadian CHILD study cohort
+Direct Acyclic Graph of the relation between gut microbiota at 4 months and Bayley cognitive scores in infancy, mediated by child secretory IgA level at 4 months.
+```{r eval=FALSE, include=FALSE}
+cf Daggity
+```
+
+# Figure S2
+Direct Acyclic Graph of the relation between secretory IgA level at 4 months and Bayley cognitive scores in infancy, mediated by child gut microbiota at 12 months.
+```{r eval=FALSE, include=FALSE}
+cf Daggity
+```
+
+
+# Figure S3
+Spearman correlations between gut microbiota variables at 4 and 12 months of age. 
 ```{r echo=FALSE, fig.height=12, fig.width=11, message=FALSE, warning=FALSE}
-figure_S1 <- bdd_filtered %>% 
-  select( p__Proteobacteria_3M,
+figure_S3 <- bdd_filtered %>% 
+  select(p__Proteobacteria_3M,
          p__Firmicutes_3M, 
          p__Bacteroidetes_3M, 
          p__Actinobacteria_3M, 
@@ -2786,8 +2798,77 @@ figure_S1 <- bdd_filtered %>%
          g__Lactobacillus_Y1, 
          g__Enterococcus_Y1, 
          Cdiff_num_Y1) %>%
-  heatmap_cor()
-figure_S1
+  rename(`Lachnospiraceae Y1` = f__Lachnospiraceae_g___Y1, 
+         `Enterobacteriaceae M3` = f__Enterobacteriaceae_g__3M, ) %>%
+  rename_with(~ gsub("p__", "", .x)) %>%
+  rename_with(~ gsub("g__", "", .x)) %>%
+  rename_with(~ gsub("_Y1", " Y1", .x)) %>%
+  rename_with(~ gsub("_3M", " M3", .x)) %>%
+  rename_with(~ gsub("metabolite_", "", .x)) %>%
+  rename_with(~ gsub("Cdiff_num", "Clostridium difficile", .x)) %>%
+  rename(`Acetate metabolite M3` = Acetate, 
+         `Propionate metabolite M3` = Propionate, 
+         `Butyrate metabolite M3` = Butyrate, 
+         `Tryptophan metabolite M3` = Tryptophan, 
+         `Taurine metabolite M3` = Taurine, 
+         `Lactate metabolite M3` = Lactate, 
+         `Formate metabolite M3` = Formate, 
+         `Tyrosine metabolite M3` = Tyrosine, 
+         `Valerate metabolite M3` = Valerate) %>%
+  select(
+    'Clostridium difficile Y1',
+  'Enterococcus Y1',
+  'Lactobacillus Y1',
+  'Streptococcus Y1',
+  'Faecalibacterium Y1',
+  'Veillonella Y1',
+  'Bifidobacterium Y1',
+  'Lachnospiraceae Y1',
+  'Bacteroides Y1',
+  'Actinobacteria Y1',
+  'Bacteroidetes Y1',
+  'Firmicutes Y1',
+  'Proteobacteria Y1',
+  'Valerate metabolite M3',
+  'Tyrosine metabolite M3',
+  'Formate metabolite M3',
+  'Lactate metabolite M3',
+  'Taurine metabolite M3',
+  'Tryptophan metabolite M3',
+  'Butyrate metabolite M3',
+  'Propionate metabolite M3',
+  'Acetate metabolite M3',
+  'Clostridium difficile M3',
+  'Enterococcus M3',
+  'Lactobacillus M3',
+  'Streptococcus M3',
+  'Veillonella M3',
+  'Bifidobacterium M3',
+  'Bacteroides M3',
+  'Enterobacteriaceae M3',
+  'Actinobacteria M3',
+  'Bacteroidetes M3',
+  'Firmicutes M3',
+  'Proteobacteria M3'
+  )
+
+
+
+figure_S3 <- cor(figure_S3, method = "spearman", use = "pairwise.complete.obs")
+
+corrplot(figure_S3, 
+         method = "color", # Méthode de coloration
+         type = "lower",   # Affiche seulement le triangle inférieur
+         order = "hclust", # Optionnel: ordonner les variables selon un clustering hiérarchique
+         tl.col = "black", # Couleur du texte pour les noms des variables
+         tl.srt = 45,      # Orientation des noms des variables (45 degrés)
+         addCoef.col = "black", # Couleur des coefficients de corrélation
+         number.cex = 0.7, # Taille des coefficients de corrélation
+         number.digits = 1,
+         diag = TRUE)
+
+
+figure_S3
 
 ggsave(plot = figure_S1, 
        filename = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/figures/article/figure_S1.tiff", 
@@ -2796,13 +2877,9 @@ ggsave(plot = figure_S1,
        width = 250)
 ```
 
-# Figure S2
-Direct Acyclic Graph of the relation between sIgA levels at 3 months, gut microbiota at 3 months, and Bayley cognitive scores in infancy.
-```{r eval=FALSE, include=FALSE}
-cf Daggity
-```
 
-# Figure S3
+
+# Figure S4
 Gut microbiota distribution at 12 months depending on secretory IgA level at 4 months of age 
 ```{r}
 bdd_figure_S3_long <- bdd_filtered %>%
