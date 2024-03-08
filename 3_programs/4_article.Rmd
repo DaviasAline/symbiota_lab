@@ -23,6 +23,7 @@ library(writexl)
 library(openxlsx)
 library(lavaan)
 library(corrplot)
+library(grDevices)
 bdd_filtered <- bdd %>% filter(!is.na(BAYLEYQ4_3_12) & !is.na(sIgA_3m))
 ```
 
@@ -2799,22 +2800,22 @@ figure_S3 <- bdd_filtered %>%
          g__Enterococcus_Y1, 
          Cdiff_num_Y1) %>%
   rename(`Lachnospiraceae Y1` = f__Lachnospiraceae_g___Y1, 
-         `Enterobacteriaceae M3` = f__Enterobacteriaceae_g__3M, ) %>%
+         `Enterobacteriaceae M4` = f__Enterobacteriaceae_g__3M, ) %>%
   rename_with(~ gsub("p__", "", .x)) %>%
   rename_with(~ gsub("g__", "", .x)) %>%
   rename_with(~ gsub("_Y1", " Y1", .x)) %>%
-  rename_with(~ gsub("_3M", " M3", .x)) %>%
+  rename_with(~ gsub("_3M", " M4", .x)) %>%
   rename_with(~ gsub("metabolite_", "", .x)) %>%
   rename_with(~ gsub("Cdiff_num", "Clostridium difficile", .x)) %>%
-  rename(`Acetate metabolite M3` = Acetate, 
-         `Propionate metabolite M3` = Propionate, 
-         `Butyrate metabolite M3` = Butyrate, 
-         `Tryptophan metabolite M3` = Tryptophan, 
-         `Taurine metabolite M3` = Taurine, 
-         `Lactate metabolite M3` = Lactate, 
-         `Formate metabolite M3` = Formate, 
-         `Tyrosine metabolite M3` = Tyrosine, 
-         `Valerate metabolite M3` = Valerate) %>%
+  rename(`Acetate metabolite M4` = Acetate, 
+         `Propionate metabolite M4` = Propionate, 
+         `Butyrate metabolite M4` = Butyrate, 
+         `Tryptophan metabolite M4` = Tryptophan, 
+         `Taurine metabolite M4` = Taurine, 
+         `Lactate metabolite M4` = Lactate, 
+         `Formate metabolite M4` = Formate, 
+         `Tyrosine metabolite M4` = Tyrosine, 
+         `Valerate metabolite M4` = Valerate) %>%
   select(
     'Clostridium difficile Y1',
   'Enterococcus Y1',
@@ -2829,52 +2830,123 @@ figure_S3 <- bdd_filtered %>%
   'Bacteroidetes Y1',
   'Firmicutes Y1',
   'Proteobacteria Y1',
-  'Valerate metabolite M3',
-  'Tyrosine metabolite M3',
-  'Formate metabolite M3',
-  'Lactate metabolite M3',
-  'Taurine metabolite M3',
-  'Tryptophan metabolite M3',
-  'Butyrate metabolite M3',
-  'Propionate metabolite M3',
-  'Acetate metabolite M3',
-  'Clostridium difficile M3',
-  'Enterococcus M3',
-  'Lactobacillus M3',
-  'Streptococcus M3',
-  'Veillonella M3',
-  'Bifidobacterium M3',
-  'Bacteroides M3',
-  'Enterobacteriaceae M3',
-  'Actinobacteria M3',
-  'Bacteroidetes M3',
-  'Firmicutes M3',
-  'Proteobacteria M3'
+  'Valerate metabolite M4',
+  'Tyrosine metabolite M4',
+  'Formate metabolite M4',
+  'Lactate metabolite M4',
+  'Taurine metabolite M4',
+  'Tryptophan metabolite M4',
+  'Butyrate metabolite M4',
+  'Propionate metabolite M4',
+  'Acetate metabolite M4',
+  'Clostridium difficile M4',
+  'Enterococcus M4',
+  'Lactobacillus M4',
+  'Streptococcus M4',
+  'Veillonella M4',
+  'Bifidobacterium M4',
+  'Bacteroides M4',
+  'Enterobacteriaceae M4',
+  'Actinobacteria M4',
+  'Bacteroidetes M4',
+  'Firmicutes M4',
+  'Proteobacteria M4'
   )
 
+order <- c('Clostridium difficile Y1',
+  'Enterococcus Y1',
+  'Lactobacillus Y1',
+  'Streptococcus Y1',
+  'Faecalibacterium Y1',
+  'Veillonella Y1',
+  'Bifidobacterium Y1',
+  'Lachnospiraceae Y1',
+  'Bacteroides Y1',
+  'Actinobacteria Y1',
+  'Bacteroidetes Y1',
+  'Firmicutes Y1',
+  'Proteobacteria Y1',
+  'Valerate metabolite M4',
+  'Tyrosine metabolite M4',
+  'Formate metabolite M4',
+  'Lactate metabolite M4',
+  'Taurine metabolite M4',
+  'Tryptophan metabolite M4',
+  'Butyrate metabolite M4',
+  'Propionate metabolite M4',
+  'Acetate metabolite M4',
+  'Clostridium difficile M4',
+  'Enterococcus M4',
+  'Lactobacillus M4',
+  'Streptococcus M4',
+  'Veillonella M4',
+  'Bifidobacterium M4',
+  'Bacteroides M4',
+  'Enterobacteriaceae M4',
+  'Actinobacteria M4',
+  'Bacteroidetes M4',
+  'Firmicutes M4',
+  'Proteobacteria M4')
 
-
-figure_S3 <- cor(figure_S3, method = "spearman", use = "pairwise.complete.obs")
-
+figure_S3 <- 
+  cor(figure_S3, method = "spearman", use = "pairwise.complete.obs") %>%
+  as.data.frame() %>%
+  rownames_to_column("var") %>%
+  select(var, 
+  'Clostridium difficile Y1',
+  'Enterococcus Y1',
+  'Lactobacillus Y1',
+  'Streptococcus Y1',
+  'Faecalibacterium Y1',
+  'Veillonella Y1',
+  'Bifidobacterium Y1',
+  'Lachnospiraceae Y1',
+  'Bacteroides Y1',
+  'Actinobacteria Y1',
+  'Bacteroidetes Y1',
+  'Firmicutes Y1',
+  'Proteobacteria Y1',
+  'Valerate metabolite M4',
+  'Tyrosine metabolite M4',
+  'Formate metabolite M4',
+  'Lactate metabolite M4',
+  'Taurine metabolite M4',
+  'Tryptophan metabolite M4',
+  'Butyrate metabolite M4',
+  'Propionate metabolite M4',
+  'Acetate metabolite M4',
+  'Clostridium difficile M4',
+  'Enterococcus M4',
+  'Lactobacillus M4',
+  'Streptococcus M4',
+  'Veillonella M4',
+  'Bifidobacterium M4',
+  'Bacteroides M4',
+  'Enterobacteriaceae M4',
+  'Actinobacteria M4',
+  'Bacteroidetes M4',
+  'Firmicutes M4',
+  'Proteobacteria M4') %>%
+  mutate(
+    var = fct_relevel(var, order)) %>%
+  column_to_rownames("var") %>%
+  as.matrix()
+  
+my_palette <- colorRampPalette(c("blue", "white", "red"))(200)
+tiff(filename = "4_output/figure_S3.tiff", units = "mm", width = 250, height = 250, res = 300)
 corrplot(figure_S3, 
          method = "color", # Méthode de coloration
          type = "lower",   # Affiche seulement le triangle inférieur
          order = "hclust", # Optionnel: ordonner les variables selon un clustering hiérarchique
          tl.col = "black", # Couleur du texte pour les noms des variables
          tl.srt = 45,      # Orientation des noms des variables (45 degrés)
+         tl.cex = 0.7, 
          addCoef.col = "black", # Couleur des coefficients de corrélation
          number.cex = 0.7, # Taille des coefficients de corrélation
          number.digits = 1,
+         col = my_palette,
          diag = TRUE)
 
-
-figure_S3
-
-ggsave(plot = figure_S1, 
-       filename = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/figures/article/figure_S1.tiff", 
-       units = "mm", 
-       height = 250, 
-       width = 250)
 ```
 
 
