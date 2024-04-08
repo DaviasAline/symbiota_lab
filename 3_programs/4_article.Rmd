@@ -233,6 +233,11 @@ table_article_Clusters_Hein_3M_bis  <- list(
               name_predictor = "Enterotypes at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Clusters_Hein_3M_bayley_Y1_bis, 
+   table_fit_crude_Clusters_Hein_3M_bayley_Y1_bis, 
+   fit_crude_Clusters_Hein_3M_bayley_Y2_bis, 
+   table_fit_crude_Clusters_Hein_3M_bayley_Y2_bis)
 ```
 
 ## ln(Proteobacteria_3M) --> sIgA 3M --> Bayley
@@ -286,6 +291,11 @@ table_article_Proteobacteria_3M_bis  <- list(
               name_predictor = "Proteobacteria at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Proteobacteria_3M_bayley_Y1_bis, 
+   table_fit_crude_Proteobacteria_3M_bayley_Y1_bis, 
+   fit_crude_Proteobacteria_3M_bayley_Y2_bis, 
+   table_fit_crude_Proteobacteria_3M_bayley_Y2_bis)
 ```
 
 
@@ -341,6 +351,11 @@ table_article_Firmicutes_3M_bis  <- list(
               name_predictor = "Firmicutes at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Firmicutes_3M_bayley_Y1_bis, 
+   table_fit_crude_Firmicutes_3M_bayley_Y1_bis, 
+   fit_crude_Firmicutes_3M_bayley_Y2_bis, 
+   table_fit_crude_Firmicutes_3M_bayley_Y2_bis)
 ```
 
 ## Bacteroidetes 3M cat --> sIgA 3M --> Bayley
@@ -421,6 +436,11 @@ table_article_Bacteroidetes_3M_bis  <- list(
               name_predictor = "Bacteroidetes at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Bacteroidetes_3M_bayley_Y1_bis, 
+   table_fit_crude_Bacteroidetes_3M_bayley_Y1_bis, 
+   fit_crude_Bacteroidetes_3M_bayley_Y2_bis, 
+   table_fit_crude_Bacteroidetes_3M_bayley_Y2_bis)
 ```
 
 
@@ -476,6 +496,11 @@ table_article_Actinobacteria_3M_bis  <- list(
               name_predictor = "Actinobacteria at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Actinobacteria_3M_bayley_Y1_bis, 
+   table_fit_crude_Actinobacteria_3M_bayley_Y1_bis, 
+   fit_crude_Actinobacteria_3M_bayley_Y2_bis, 
+   table_fit_crude_Actinobacteria_3M_bayley_Y2_bis)
 ```
 
 ## ln(Enterobacteriaceae_g) 3M --> sIgA 3M --> Bayley
@@ -530,6 +555,11 @@ table_article_Enterobacteriaceae_g__3M_bis  <- list(
               name_predictor = "Enterobacteriaceae (unamed genus) at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_bis, 
+   table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_bis, 
+   fit_crude_Enterobacteriaceae_g__3M_bayley_Y2_bis, 
+   table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y2_bis)
 
 ```
 
@@ -613,6 +643,11 @@ table_article_Bacteroides_3M_bis  <- list(
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
 
+rm(fit_crude_Bacteroides_3M_bayley_Y1_bis, 
+   table_fit_crude_Bacteroides_3M_bayley_Y1_bis, 
+   fit_crude_Bacteroides_3M_bayley_Y2_bis, 
+   table_fit_crude_Bacteroides_3M_bayley_Y2_bis)
+
 ```
 
 ## ln(Bifidobacterium) 3M --> sIgA 3M --> Bayley
@@ -669,6 +704,11 @@ table_article_Bifidobacterium_3M_bis  <- list(
               name_predictor = "Bifidobacterium at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Bifidobacterium_3M_bayley_Y1_bis, 
+   table_fit_crude_Bifidobacterium_3M_bayley_Y1_bis, 
+   fit_crude_Bifidobacterium_3M_bayley_Y2_bis, 
+   table_fit_crude_Bifidobacterium_3M_bayley_Y2_bis)
 
 ```
 
@@ -727,6 +767,11 @@ table_article_Veillonella_3M_bis  <- list(
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
 
+rm(fit_crude_Veillonella_3M_bayley_Y1_bis, 
+   table_fit_crude_Veillonella_3M_bayley_Y1_bis, 
+   fit_crude_Veillonella_3M_bayley_Y2_bis, 
+   table_fit_crude_Veillonella_3M_bayley_Y2_bis)
+
 ```
 
 
@@ -782,6 +827,11 @@ table_article_Streptococcus_3M_bis  <- list(
               name_predictor = "Streptococcus at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Streptococcus_3M_bayley_Y1_bis, 
+   table_fit_crude_Streptococcus_3M_bayley_Y1_bis, 
+   fit_crude_Streptococcus_3M_bayley_Y2_bis, 
+   table_fit_crude_Streptococcus_3M_bayley_Y2_bis)
 ```
 
 ## Lactobacillus_3M cat --> sIgA 3M --> Bayley
@@ -864,6 +914,11 @@ table_article_Lactobacillus_3M_bis  <- list(
               name_predictor = "Lactobacillus at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Lactobacillus_3M_bayley_Y1_bis, 
+   table_fit_crude_Lactobacillus_3M_bayley_Y1_bis, 
+   fit_crude_Lactobacillus_3M_bayley_Y2_bis, 
+   table_fit_crude_Lactobacillus_3M_bayley_Y2_bis)
 ```
 
 ## Enterococcus_3M cat --> sIgA 3M --> Bayley
@@ -944,6 +999,11 @@ table_article_Enterococcus_3M_bis  <- list(
               name_predictor = "Enterococcus at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Enterococcus_3M_bayley_Y1_bis, 
+   table_fit_crude_Enterococcus_3M_bayley_Y1_bis, 
+   fit_crude_Enterococcus_3M_bayley_Y2_bis, 
+   table_fit_crude_Enterococcus_3M_bayley_Y2_bis)
 ```
 
 ## ln(C Difficile) 3M --> sIgA 3M --> Bayley
@@ -997,6 +1057,11 @@ table_article_Cdiff_num_3M_bis  <- list(
               name_predictor = "C Difficile at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Cdiff_num_3M_bayley_Y1_bis, 
+   table_fit_crude_Cdiff_num_3M_bayley_Y1_bis, 
+   fit_crude_Cdiff_num_3M_bayley_Y2_bis, 
+   table_fit_crude_Cdiff_num_3M_bayley_Y2_bis)
 ```
 
 ## C Difficile cat --> sIgA 3M --> Bayley
@@ -1077,7 +1142,13 @@ table_article_Cdiff_cat_3M_bis  <- list(
               name_predictor = "C Difficile at 3 months (cat)") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Cdiff_cat_3M_bayley_Y1_bis, 
+   table_fit_crude_Cdiff_cat_3M_bayley_Y1_bis, 
+   fit_crude_Cdiff_cat_3M_bayley_Y2_bis, 
+   table_fit_crude_Cdiff_cat_3M_bayley_Y2_bis)
 ```
+
 ## ln(Acetate) 3M --> sIgA 3M --> Bayley 
 ```{r}
 bdd_final_Y1 <- bdd %>%
@@ -1131,6 +1202,11 @@ table_article_Acetate_3M_bis  <- list(
               name_predictor = "Acetate metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Acetate_3M_bayley_Y1_bis, 
+   table_fit_crude_Acetate_3M_bayley_Y1_bis, 
+   fit_crude_Acetate_3M_bayley_Y2_bis, 
+   table_fit_crude_Acetate_3M_bayley_Y2_bis)
 ```
 
 ## ln(Propionate) 3M --> sIgA 3M --> Bayley
@@ -1184,6 +1260,11 @@ table_article_Propionate_3M_bis  <- list(
               name_predictor = "Propionate metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Propionate_3M_bayley_Y1_bis, 
+   table_fit_crude_Propionate_3M_bayley_Y1_bis, 
+   fit_crude_Propionate_3M_bayley_Y2_bis, 
+   table_fit_crude_Propionate_3M_bayley_Y2_bis)
 ```
 
 ## ln(Butyrate) 3M --> sIgA 3M --> Bayley 
@@ -1237,6 +1318,11 @@ table_article_Butyrate_3M_bis  <- list(
               name_predictor = "Butyrate metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Butyrate_3M_bayley_Y1_bis, 
+   table_fit_crude_Butyrate_3M_bayley_Y1_bis, 
+   fit_crude_Butyrate_3M_bayley_Y2_bis, 
+   table_fit_crude_Butyrate_3M_bayley_Y2_bis)
 ```
 
 
@@ -1291,6 +1377,11 @@ table_article_Tryptophan_3M_bis  <- list(
               name_predictor = "Tryptophan metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Tryptophan_3M_bayley_Y1_bis, 
+   table_fit_crude_Tryptophan_3M_bayley_Y1_bis, 
+   fit_crude_Tryptophan_3M_bayley_Y2_bis, 
+   table_fit_crude_Tryptophan_3M_bayley_Y2_bis)
 ```
 
 
@@ -1345,6 +1436,11 @@ table_article_Taurine_3M_bis  <- list(
               name_predictor = "Taurine metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Taurine_3M_bayley_Y1_bis, 
+   table_fit_crude_Taurine_3M_bayley_Y1_bis, 
+   fit_crude_Taurine_3M_bayley_Y2_bis, 
+   table_fit_crude_Taurine_3M_bayley_Y2_bis)
 ```
 
 ## ln(Lactate) 3M --> sIgA 3M --> Bayley
@@ -1398,6 +1494,11 @@ table_article_Lactate_3M_bis  <- list(
               name_predictor = "Lactate metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Lactate_3M_bayley_Y1_bis, 
+   table_fit_crude_Lactate_3M_bayley_Y1_bis, 
+   fit_crude_Lactate_3M_bayley_Y2_bis, 
+   table_fit_crude_Lactate_3M_bayley_Y2_bis)
 ```
 
 ## ln(Formate) 3M --> sIgA 3M --> Bayley 
@@ -1451,6 +1552,11 @@ table_article_Formate_3M_bis  <- list(
               name_predictor = "Formate metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Formate_3M_bayley_Y1_bis, 
+   table_fit_crude_Formate_3M_bayley_Y1_bis, 
+   fit_crude_Formate_3M_bayley_Y2_bis, 
+   table_fit_crude_Formate_3M_bayley_Y2_bis)
 ```
 
 ## ln(Tyrosine) 3M --> sIgA 3M --> Bayley 
@@ -1504,6 +1610,11 @@ table_article_Tyrosine_3M_bis  <- list(
               name_predictor = "Tyrosine metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Tyrosine_3M_bayley_Y1_bis, 
+   table_fit_crude_Tyrosine_3M_bayley_Y1_bis, 
+   fit_crude_Tyrosine_3M_bayley_Y2_bis, 
+   table_fit_crude_Tyrosine_3M_bayley_Y2_bis)
 ```
 
 ## ln(Valerate) 3M --> sIgA 3M --> Bayley 
@@ -1557,6 +1668,11 @@ table_article_Valerate_3M_bis  <- list(
               name_predictor = "Valerate metabolite at 3 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Valerate_3M_bayley_Y1_bis, 
+   table_fit_crude_Valerate_3M_bayley_Y1_bis, 
+   fit_crude_Valerate_3M_bayley_Y2_bis, 
+   table_fit_crude_Valerate_3M_bayley_Y2_bis)
 ```
 
 ```{r}
@@ -1681,6 +1797,11 @@ table_article_Clusters_Y1  <- list(
     nettoyage(fit = table_fit_crude_Clusters_Y1_bayley_Y2, name_mediator = "Clusters at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Clusters_Y1_bayley_Y1, 
+   table_fit_crude_Clusters_Y1_bayley_Y1, 
+   fit_crude_Clusters_Y1_bayley_Y2, 
+   table_fit_crude_Clusters_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Proteobacteria ln 12M --> Bayley
@@ -1734,6 +1855,11 @@ table_article_Proteobacteria_Y1  <- list(
               name_mediator = "Proteobacteria at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Proteobacteria_Y1_bayley_Y1, 
+   table_fit_crude_Proteobacteria_Y1_bayley_Y1, 
+   fit_crude_Proteobacteria_Y1_bayley_Y2, 
+   table_fit_crude_Proteobacteria_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Firmicutes ln 12M --> Bayley
@@ -1787,6 +1913,11 @@ table_article_Firmicutes_Y1  <- list(
               name_mediator = "Firmicutes at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Firmicutes_Y1_bayley_Y1, 
+   table_fit_crude_Firmicutes_Y1_bayley_Y1, 
+   fit_crude_Firmicutes_Y1_bayley_Y2, 
+   table_fit_crude_Firmicutes_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Bacteroidetes cat 12M --> Bayley
@@ -1866,6 +1997,11 @@ table_article_Bacteroidetes_Y1  <- list(
               name_mediator = "Bacteroidetes at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Bacteroidetes_Y1_bayley_Y1, 
+   table_fit_crude_Bacteroidetes_Y1_bayley_Y1, 
+   fit_crude_Bacteroidetes_Y1_bayley_Y2, 
+   table_fit_crude_Bacteroidetes_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Actinobacteria ln 12M --> Bayley
@@ -1919,6 +2055,11 @@ table_article_Actinobacteria_Y1  <- list(
               name_mediator = "Actinobacteria at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Actinobacteria_Y1_bayley_Y1, 
+   table_fit_crude_Actinobacteria_Y1_bayley_Y1, 
+   fit_crude_Actinobacteria_Y1_bayley_Y2, 
+   table_fit_crude_Actinobacteria_Y1_bayley_Y2)
 ```
 
 
@@ -1973,6 +2114,11 @@ table_article_Bacteroides_Y1  <- list(
               name_mediator = "Bacteroides at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Bacteroides_Y1_bayley_Y1, 
+   table_fit_crude_Bacteroides_Y1_bayley_Y1, 
+   fit_crude_Bacteroides_Y1_bayley_Y2, 
+   table_fit_crude_Bacteroides_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Lachnospiraceae_g__ ln 12M --> Bayley
@@ -2028,6 +2174,11 @@ table_article_Lachnospiraceae_g_Y1  <- list(
               name_mediator = "Lachnospiraceae_g at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Lachnospiraceae_g__Y1_bayley_Y1, 
+   table_fit_crude_Lachnospiraceae_g__Y1_bayley_Y1, 
+   fit_crude_Lachnospiraceae_g__Y1_bayley_Y2, 
+   table_fit_crude_Lachnospiraceae_g__Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Bifidobacterium ln 12M --> Bayley
@@ -2083,6 +2234,11 @@ table_article_Bifidobacterium_Y1  <- list(
               name_mediator = "Bifidobacterium at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Bifidobacterium_Y1_bayley_Y1, 
+   table_fit_crude_Bifidobacterium_Y1_bayley_Y1, 
+   fit_crude_Bifidobacterium_Y1_bayley_Y2, 
+   table_fit_crude_Bifidobacterium_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Veillonella ln 12M --> Bayley
@@ -2136,6 +2292,11 @@ table_article_Veillonella_Y1  <- list(
               name_mediator = "Veillonella at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Veillonella_Y1_bayley_Y1, 
+   table_fit_crude_Veillonella_Y1_bayley_Y1, 
+   fit_crude_Veillonella_Y1_bayley_Y2, 
+   table_fit_crude_Veillonella_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Faecalibacterium ln 12M --> Bayley
@@ -2191,6 +2352,11 @@ table_article_Faecalibacterium_Y1  <- list(
               name_mediator = "Faecalibacterium at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Faecalibacterium_Y1_bayley_Y1, 
+   table_fit_crude_Faecalibacterium_Y1_bayley_Y1, 
+   fit_crude_Faecalibacterium_Y1_bayley_Y2, 
+   table_fit_crude_Faecalibacterium_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> ln(Streptococcus_Y1) --> Bayley
@@ -2244,6 +2410,11 @@ table_article_Streptococcus_Y1  <- list(
     nettoyage(fit = table_fit_crude_Streptococcus_Y1_bayley_Y2, name_mediator = "Streptococcus at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Streptococcus_Y1_bayley_Y1, 
+   table_fit_crude_Streptococcus_Y1_bayley_Y1, 
+   fit_crude_Streptococcus_Y1_bayley_Y2, 
+   table_fit_crude_Streptococcus_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Lactobacillus Y1 cat --> Bayley
@@ -2322,6 +2493,11 @@ table_article_Lactobacillus_Y1  <- list(
     nettoyage(fit = table_fit_crude_Lactobacillus_Y1_bayley_Y2, name_mediator = "Lactobacillus at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Lactobacillus_Y1_bayley_Y1, 
+   table_fit_crude_Lactobacillus_Y1_bayley_Y1, 
+   fit_crude_Lactobacillus_Y1_bayley_Y2, 
+   table_fit_crude_Lactobacillus_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> Enterococcus Y1 cat --> Bayley
@@ -2400,6 +2576,11 @@ table_article_Enterococcus_Y1  <- list(
     nettoyage(fit = table_fit_crude_Enterococcus_Y1_bayley_Y2, name_mediator = "Enterococcus at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Enterococcus_Y1_bayley_Y1, 
+   table_fit_crude_Enterococcus_Y1_bayley_Y1, 
+   fit_crude_Enterococcus_Y1_bayley_Y2, 
+   table_fit_crude_Enterococcus_Y1_bayley_Y2)
 ```
 
 
@@ -2454,6 +2635,11 @@ table_article_Cdiff_num_Y1  <- list(
               name_mediator = "C difficile (num) at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Cdiff_num_Y1_bayley_Y1, 
+   table_fit_crude_Cdiff_num_Y1_bayley_Y1, 
+   fit_crude_Cdiff_num_Y1_bayley_Y2, 
+   table_fit_crude_Cdiff_num_Y1_bayley_Y2)
 ```
 
 ## sIgA 3M --> C Difficile cat 12M --> Bayley
@@ -2533,6 +2719,11 @@ table_article_Cdiff_cat_Y1  <- list(
               name_mediator = "C difficile (cat) at 12 months") %>%
     rename("Est Y2" = est, "CI Y2" = CI, "p-value Y2" = pvalue))%>%
   reduce(~left_join(.x, .y, by = c("Predictor", "Mediator", "Path")))
+
+rm(fit_crude_Cdiff_cat_Y1_bayley_Y1, 
+   table_fit_crude_Cdiff_cat_Y1_bayley_Y1, 
+   fit_crude_Cdiff_cat_Y1_bayley_Y2, 
+   table_fit_crude_Cdiff_cat_Y1_bayley_Y2)
 ```
 
 ```{r}
@@ -8345,7 +8536,109 @@ table_fit_crude_Enterococcus_Y1_bayley_Y1_strat  <- list(
 rm(mediation, nettoyage)
 ```
 
+
+# Ancien sens sIgA --> GM 3M --> neuro
+```{r}
+table_2_ancien_sens <- list(
+  table_article_Clusters_Hein_3M = table_article_Clusters_Hein_3M,
+  table_article_Proteobacteria_3M = table_article_Proteobacteria_3M,
+  table_article_Firmicutes_3M = table_article_Firmicutes_3M,
+  table_article_Bacteroidetes_3M = table_article_Bacteroidetes_3M,
+  table_article_Actinobacteria_3M = table_article_Actinobacteria_3M,
+  table_article_Enterobacteriaceae_g__3M = table_article_Enterobacteriaceae_g__3M,
+  table_article_Bacteroides_3M = table_article_Bacteroides_3M,
+  table_article_Bifidobacterium_3M = table_article_Bifidobacterium_3M,
+  table_article_Veillonella_3M = table_article_Veillonella_3M,
+  table_article_Streptococcus_3M = table_article_Streptococcus_3M,
+  table_article_Lactobacillus_3M = table_article_Lactobacillus_3M,
+  table_article_Enterococcus_3M = table_article_Enterococcus_3M,
+  table_article_Cdiff_num_3M = table_article_Cdiff_num_3M,
+  table_article_Cdiff_cat_3M = table_article_Cdiff_cat_3M,
+  table_article_Acetate_3M = table_article_Acetate_3M,
+  table_article_Propionate_3M = table_article_Propionate_3M,
+  table_article_Butyrate_3M = table_article_Butyrate_3M,
+  table_article_Tryptophan_3M = table_article_Tryptophan_3M,
+  table_article_Taurine_3M = table_article_Taurine_3M,
+  table_article_Lactate_3M = table_article_Lactate_3M,
+  table_article_Formate_3M = table_article_Formate_3M
+)
+
+
+rm(
+  table_article_Clusters_Hein_3M, 
+  table_article_Proteobacteria_3M, 
+  table_article_Firmicutes_3M, 
+  table_article_Bacteroidetes_3M, 
+  table_article_Actinobacteria_3M, 
+  table_article_Enterobacteriaceae_g__3M, 
+  table_article_Bacteroides_3M, 
+  table_article_Bifidobacterium_3M, 
+  table_article_Veillonella_3M, 
+  table_article_Streptococcus_3M, 
+  table_article_Lactobacillus_3M, 
+  table_article_Enterococcus_3M, 
+  table_article_Cdiff_num_3M, 
+  table_article_Cdiff_cat_3M, 
+  table_article_Acetate_3M, 
+  table_article_Propionate_3M, 
+  table_article_Butyrate_3M, 
+  table_article_Tryptophan_3M, 
+  table_article_Taurine_3M, 
+  table_article_Lactate_3M, 
+  table_article_Formate_3M
+)
+
+table_2_ancien_sens_strat <- list(
+  table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat = table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat,
+  table_fit_crude_Proteobacteria_3M_bayley_Y1_strat = table_fit_crude_Proteobacteria_3M_bayley_Y1_strat,
+  table_fit_crude_Firmicutes_3M_bayley_Y1_strat = table_fit_crude_Firmicutes_3M_bayley_Y1_strat,
+  table_fit_crude_Bacteroidetes_3M_bayley_Y1_strat = table_fit_crude_Bacteroidetes_3M_bayley_Y1_strat,
+  table_fit_crude_Actinobacteria_3M_bayley_Y1_strat = table_fit_crude_Actinobacteria_3M_bayley_Y1_strat,
+  table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_strat = table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_strat,
+  table_fit_crude_Bacteroides_3M_bayley_Y1_strat = table_fit_crude_Bacteroides_3M_bayley_Y1_strat,
+  table_fit_crude_Bifidobacterium_3M_bayley_Y1_strat = table_fit_crude_Bifidobacterium_3M_bayley_Y1_strat,
+  table_fit_crude_Veillonella_3M_bayley_Y1_strat = table_fit_crude_Veillonella_3M_bayley_Y1_strat,
+  table_fit_crude_Streptococcus_3M_bayley_Y1_strat = table_fit_crude_Streptococcus_3M_bayley_Y1_strat,
+  table_fit_crude_Lactobacillus_3M_bayley_Y1_strat = table_fit_crude_Lactobacillus_3M_bayley_Y1_strat,
+  table_fit_crude_Enterococcus_3M_bayley_Y1_strat = table_fit_crude_Enterococcus_3M_bayley_Y1_strat,
+  table_fit_crude_Cdiff_num_3M_bayley_Y1_strat = table_fit_crude_Cdiff_num_3M_bayley_Y1_strat,
+  table_fit_crude_Cdiff_cat_3M_bayley_Y1_strat = table_fit_crude_Cdiff_cat_3M_bayley_Y1_strat,
+  table_fit_crude_metabolite_Acetate_bayley_Y1_strat = table_fit_crude_metabolite_Acetate_bayley_Y1_strat,
+  table_fit_crude_metabolite_Propionate_bayley_Y1_strat = table_fit_crude_metabolite_Propionate_bayley_Y1_strat,
+  table_fit_crude_metabolite_Butyrate_bayley_Y1_strat = table_fit_crude_metabolite_Butyrate_bayley_Y1_strat,
+  table_fit_crude_metabolite_Tryptophan_bayley_Y1_strat = table_fit_crude_metabolite_Tryptophan_bayley_Y1_strat,
+  table_fit_crude_metabolite_Taurine_bayley_Y1_strat = table_fit_crude_metabolite_Taurine_bayley_Y1_strat,
+  table_fit_crude_metabolite_Lactate_bayley_Y1_strat = table_fit_crude_metabolite_Lactate_bayley_Y1_strat,
+  table_fit_crude_metabolite_Formate_bayley_Y1_strat = table_fit_crude_metabolite_Formate_bayley_Y1_strat
+)
+
+rm(
+  table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat, 
+  table_fit_crude_Proteobacteria_3M_bayley_Y1_strat, 
+  table_fit_crude_Firmicutes_3M_bayley_Y1_strat, 
+  table_fit_crude_Bacteroidetes_3M_bayley_Y1_strat, 
+  table_fit_crude_Actinobacteria_3M_bayley_Y1_strat, 
+  table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_strat, 
+  table_fit_crude_Bacteroides_3M_bayley_Y1_strat, 
+  table_fit_crude_Bifidobacterium_3M_bayley_Y1_strat, 
+  table_fit_crude_Veillonella_3M_bayley_Y1_strat, 
+  table_fit_crude_Streptococcus_3M_bayley_Y1_strat, 
+  table_fit_crude_Lactobacillus_3M_bayley_Y1_strat, 
+  table_fit_crude_Enterococcus_3M_bayley_Y1_strat, 
+  table_fit_crude_Cdiff_num_3M_bayley_Y1_strat,
+  table_fit_crude_Cdiff_cat_3M_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Acetate_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Propionate_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Butyrate_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Tryptophan_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Taurine_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Lactate_bayley_Y1_strat, 
+  table_fit_crude_metabolite_Formate_bayley_Y1_strat)
+```
+
+
 # Assemblage et export
+## table 2 
 ```{r}
 table_2_boots  <- bind_rows(
   
@@ -8388,6 +8681,72 @@ table_2_boots  <- bind_rows(
     figures_Y1 = ifelse(figures_Y1 == "NA (NA, NA) p=NA", "", figures_Y1), 
     figures_Y2 = ifelse(figures_Y2 == "NA (NA, NA) p=NA", "", figures_Y2)) 
 
+
+table_2_boots_list <- list(
+  table_article_Clusters_Hein_3M_bis = table_article_Clusters_Hein_3M_bis,
+  table_article_Proteobacteria_3M_bis = table_article_Proteobacteria_3M_bis,
+  table_article_Firmicutes_3M_bis = table_article_Firmicutes_3M_bis,
+  table_article_Bacteroidetes_3M_bis = table_article_Bacteroidetes_3M_bis,
+  table_article_Actinobacteria_3M_bis = table_article_Actinobacteria_3M_bis,
+  
+  table_article_Enterobacteriaceae_g__3M_bis = table_article_Enterobacteriaceae_g__3M_bis,
+  table_article_Bacteroides_3M_bis = table_article_Bacteroides_3M_bis,
+  table_article_Bifidobacterium_3M_bis = table_article_Bifidobacterium_3M_bis,
+  table_article_Veillonella_3M_bis = table_article_Veillonella_3M_bis,
+  
+  table_article_Streptococcus_3M_bis = table_article_Streptococcus_3M_bis,
+  table_article_Lactobacillus_3M_bis = table_article_Lactobacillus_3M_bis,
+  table_article_Enterococcus_3M_bis = table_article_Enterococcus_3M_bis,
+  
+  table_article_Cdiff_num_3M_bis = table_article_Cdiff_num_3M_bis,
+  table_article_Cdiff_cat_3M_bis = table_article_Cdiff_cat_3M_bis,
+  
+  table_article_Acetate_3M_bis = table_article_Acetate_3M_bis,
+  table_article_Propionate_3M_bis = table_article_Propionate_3M_bis,
+  table_article_Butyrate_3M_bis = table_article_Butyrate_3M_bis,
+  
+  table_article_Tryptophan_3M_bis = table_article_Tryptophan_3M_bis,
+  table_article_Taurine_3M_bis = table_article_Taurine_3M_bis,
+  table_article_Lactate_3M_bis = table_article_Lactate_3M_bis,
+  table_article_Formate_3M_bis = table_article_Formate_3M_bis,
+  
+  table_article_Tyrosine_3M_bis = table_article_Tyrosine_3M_bis,
+  table_article_Valerate_3M_bis = table_article_Valerate_3M_bis
+)
+
+rm(table_article_Clusters_Hein_3M_bis,
+  table_article_Proteobacteria_3M_bis, 
+  table_article_Firmicutes_3M_bis, 
+  table_article_Bacteroidetes_3M_bis, 
+  table_article_Actinobacteria_3M_bis, 
+  
+  table_article_Enterobacteriaceae_g__3M_bis,
+  table_article_Bacteroides_3M_bis, 
+  table_article_Bifidobacterium_3M_bis, 
+  table_article_Veillonella_3M_bis,
+  
+  table_article_Streptococcus_3M_bis, 
+  table_article_Lactobacillus_3M_bis, 
+  table_article_Enterococcus_3M_bis, 
+  
+  table_article_Cdiff_num_3M_bis, 
+  table_article_Cdiff_cat_3M_bis, 
+  
+  table_article_Acetate_3M_bis, 
+  table_article_Propionate_3M_bis, 
+  table_article_Butyrate_3M_bis, 
+  
+  table_article_Tryptophan_3M_bis, 
+  table_article_Taurine_3M_bis, 
+  table_article_Lactate_3M_bis, 
+  table_article_Formate_3M_bis, 
+  
+  table_article_Tyrosine_3M_bis, 
+  table_article_Valerate_3M_bis)
+```
+
+## table 3 
+```{r}
 table_3_boots  <- bind_rows(
   
   table_article_Clusters_Y1,
@@ -8416,7 +8775,47 @@ table_3_boots  <- bind_rows(
     figures_Y1 = ifelse(figures_Y1 == "NA (NA, NA) p=NA", "", figures_Y1), 
     figures_Y2 = ifelse(figures_Y2 == "NA (NA, NA) p=NA", "", figures_Y2)) 
 
+table_3_boots_list <- list(
+  table_article_Clusters_Y1 = table_article_Clusters_Y1,
+  table_article_Proteobacteria_Y1 = table_article_Proteobacteria_Y1,
+  table_article_Firmicutes_Y1 = table_article_Firmicutes_Y1,
+  table_article_Bacteroidetes_Y1 = table_article_Bacteroidetes_Y1,
+  table_article_Actinobacteria_Y1 = table_article_Actinobacteria_Y1,
+  table_article_Cdiff_num_Y1 = table_article_Cdiff_num_Y1,
+  table_article_Cdiff_cat_Y1 = table_article_Cdiff_cat_Y1,
+  
+  table_article_Bacteroides_Y1 = table_article_Bacteroides_Y1,
+  table_article_Lachnospiraceae_g_Y1 = table_article_Lachnospiraceae_g_Y1,
+  table_article_Bifidobacterium_Y1 = table_article_Bifidobacterium_Y1,
+  table_article_Veillonella_Y1 = table_article_Veillonella_Y1,
+  table_article_Faecalibacterium_Y1 = table_article_Faecalibacterium_Y1,
+  
+  table_article_Streptococcus_Y1 = table_article_Streptococcus_Y1,
+  table_article_Lactobacillus_Y1 = table_article_Lactobacillus_Y1,
+  table_article_Enterococcus_Y1 = table_article_Enterococcus_Y1
+)
 
+rm(table_article_Clusters_Y1,
+  table_article_Proteobacteria_Y1, 
+  table_article_Firmicutes_Y1, 
+  table_article_Bacteroidetes_Y1, 
+  table_article_Actinobacteria_Y1, 
+  table_article_Cdiff_num_Y1, 
+  table_article_Cdiff_cat_Y1, 
+  
+  table_article_Bacteroides_Y1,
+  table_article_Lachnospiraceae_g_Y1, 
+  table_article_Bifidobacterium_Y1, 
+  table_article_Veillonella_Y1, 
+  table_article_Faecalibacterium_Y1, 
+  
+  table_article_Streptococcus_Y1, 
+  table_article_Lactobacillus_Y1, 
+  table_article_Enterococcus_Y1)
+```
+
+## table S2-S3 
+```{r}
 table_S2_S3_boots <- bind_rows(
   table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat_bis,
   table_fit_crude_Proteobacteria_3M_bayley_Y1_strat_bis,
@@ -8471,6 +8870,72 @@ table_S2_S3_boots <- bind_rows(
          figures_Y1_exclusive, figures_Y1_partial, figures_Y1_none, 
          figures_Y2_exclusive, figures_Y2_partial, figures_Y2_none) 
 
+
+table_S2_S3_boots_list <- list(
+  table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat_bis = table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Proteobacteria_3M_bayley_Y1_strat_bis = table_fit_crude_Proteobacteria_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Firmicutes_3M_bayley_Y1_strat_bis = table_fit_crude_Firmicutes_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Bacteroidetes_3M_bayley_Y1_strat_bis = table_fit_crude_Bacteroidetes_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Actinobacteria_3M_bayley_Y1_strat_bis = table_fit_crude_Actinobacteria_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_strat_bis = table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_strat_bis,
+  table_fit_crude_Bacteroides_3M_bayley_Y1_strat_bis = table_fit_crude_Bacteroides_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Bifidobacterium_3M_bayley_Y1_strat_bis = table_fit_crude_Bifidobacterium_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Veillonella_3M_bayley_Y1_strat_bis = table_fit_crude_Veillonella_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Streptococcus_3M_bayley_Y1_strat_bis = table_fit_crude_Streptococcus_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Lactobacillus_3M_bayley_Y1_strat_bis = table_fit_crude_Lactobacillus_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Enterococcus_3M_bayley_Y1_strat_bis = table_fit_crude_Enterococcus_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Cdiff_num_3M_bayley_Y1_strat_bis = table_fit_crude_Cdiff_num_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Cdiff_cat_3M_bayley_Y1_strat_bis = table_fit_crude_Cdiff_cat_3M_bayley_Y1_strat_bis
+)
+
+
+rm(table_fit_crude_Clusters_Hein_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Proteobacteria_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Firmicutes_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Bacteroidetes_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Actinobacteria_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Enterobacteriaceae_g__3M_bayley_Y1_strat_bis,
+  table_fit_crude_Bacteroides_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Bifidobacterium_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Veillonella_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Streptococcus_3M_bayley_Y1_strat_bis,
+  table_fit_crude_Lactobacillus_3M_bayley_Y1_strat_bis, 
+  table_fit_crude_Enterococcus_3M_bayley_Y1_strat_bis, 
+  table_fit_crude_Cdiff_num_3M_bayley_Y1_strat_bis, 
+  table_fit_crude_Cdiff_cat_3M_bayley_Y1_strat_bis)
+
+
+table_S2_S3_boots_list_metabolites <- list(
+  table_fit_crude_metabolite_Acetate_bayley_Y1_strat_bis = table_fit_crude_metabolite_Acetate_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Butyrate_bayley_Y1_strat_bis = table_fit_crude_metabolite_Butyrate_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Formate_bayley_Y1_strat_bis = table_fit_crude_metabolite_Formate_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Lactate_bayley_Y1_strat_bis = table_fit_crude_metabolite_Lactate_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Propionate_bayley_Y1_strat_bis = table_fit_crude_metabolite_Propionate_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Taurine_bayley_Y1_strat_bis = table_fit_crude_metabolite_Taurine_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Tryptophan_bayley_Y1_strat_bis = table_fit_crude_metabolite_Tryptophan_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Tyrosine_bayley_Y1_strat_bis = table_fit_crude_metabolite_Tyrosine_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Valerate_bayley_Y1_strat_bis = table_fit_crude_metabolite_Valerate_bayley_Y1_strat_bis
+)
+
+
+rm(
+  table_fit_crude_metabolite_Acetate_bayley_Y1_strat_bis,
+  table_fit_crude_metabolite_Butyrate_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Formate_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Lactate_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Propionate_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Taurine_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Tryptophan_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Tyrosine_bayley_Y1_strat_bis, 
+  table_fit_crude_metabolite_Valerate_bayley_Y1_strat_bis
+)
+
+table_S2_S3_boots_list <- c(table_S2_S3_boots_list, table_S2_S3_boots_list_metabolites)
+rm(table_S2_S3_boots_list_metabolites)
+```
+
+## table S4-S5 
+```{r}
 table_S4_S5_boots  <- bind_rows(
   
   table_fit_crude_Clusters_Y1_bayley_Y1_strat,
@@ -8530,27 +8995,50 @@ table_S4_S5_boots  <- bind_rows(
          figures_Y2_exclusive, figures_Y2_partial, figures_Y2_none)
 
 
+table_S4_S5_boots_list <- list(
+  table_fit_crude_Clusters_Y1_bayley_Y1_strat = table_fit_crude_Clusters_Y1_bayley_Y1_strat,
+  table_fit_crude_Proteobacteria_Y1_bayley_Y1_strat = table_fit_crude_Proteobacteria_Y1_bayley_Y1_strat,
+  table_fit_crude_Firmicutes_Y1_bayley_Y1_strat = table_fit_crude_Firmicutes_Y1_bayley_Y1_strat,
+  table_fit_crude_Bacteroidetes_Y1_bayley_Y1_strat = table_fit_crude_Bacteroidetes_Y1_bayley_Y1_strat,
+  table_fit_crude_Actinobacteria_Y1_bayley_Y1_strat = table_fit_crude_Actinobacteria_Y1_bayley_Y1_strat,
+  table_fit_crude_Cdiff_num_Y1_bayley_Y1_strat = table_fit_crude_Cdiff_num_Y1_bayley_Y1_strat,
+  table_fit_crude_Cdiff_cat_Y1_bayley_Y1_strat = table_fit_crude_Cdiff_cat_Y1_bayley_Y1_strat,
+  
+  table_fit_crude_Bacteroides_Y1_bayley_Y1_strat = table_fit_crude_Bacteroides_Y1_bayley_Y1_strat,
+  table_fit_crude_Lachnospiraceae_g_Y1_bayley_Y1_strat = table_fit_crude_Lachnospiraceae_g_Y1_bayley_Y1_strat,
+  table_fit_crude_Bifidobacterium_Y1_bayley_Y1_strat = table_fit_crude_Bifidobacterium_Y1_bayley_Y1_strat,
+  table_fit_crude_Veillonella_Y1_bayley_Y1_strat = table_fit_crude_Veillonella_Y1_bayley_Y1_strat,
+  table_fit_crude_Faecalibacterium_Y1_bayley_Y1_strat = table_fit_crude_Faecalibacterium_Y1_bayley_Y1_strat,
+  
+  table_fit_crude_Streptococcus_Y1_bayley_Y1_strat = table_fit_crude_Streptococcus_Y1_bayley_Y1_strat,
+  table_fit_crude_Lactobacillus_Y1_bayley_Y1_strat = table_fit_crude_Lactobacillus_Y1_bayley_Y1_strat,
+  table_fit_crude_Enterococcus_Y1_bayley_Y1_strat = table_fit_crude_Enterococcus_Y1_bayley_Y1_strat
+)
 
-# Export ----
+
+rm(
+  table_fit_crude_Clusters_Y1_bayley_Y1_strat,
+  table_fit_crude_Proteobacteria_Y1_bayley_Y1_strat, 
+  table_fit_crude_Firmicutes_Y1_bayley_Y1_strat, 
+  table_fit_crude_Bacteroidetes_Y1_bayley_Y1_strat, 
+  table_fit_crude_Actinobacteria_Y1_bayley_Y1_strat, 
+  table_fit_crude_Cdiff_num_Y1_bayley_Y1_strat, 
+  table_fit_crude_Cdiff_cat_Y1_bayley_Y1_strat, 
+  
+  table_fit_crude_Bacteroides_Y1_bayley_Y1_strat,
+  table_fit_crude_Lachnospiraceae_g_Y1_bayley_Y1_strat, 
+  table_fit_crude_Bifidobacterium_Y1_bayley_Y1_strat, 
+  table_fit_crude_Veillonella_Y1_bayley_Y1_strat, 
+  table_fit_crude_Faecalibacterium_Y1_bayley_Y1_strat, 
+  
+  table_fit_crude_Streptococcus_Y1_bayley_Y1_strat, 
+  table_fit_crude_Lactobacillus_Y1_bayley_Y1_strat, 
+  table_fit_crude_Enterococcus_Y1_bayley_Y1_strat)
+```
+
+
+# Export
+```{r}
 save(list = ls(),
      file = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/5. R projects/symbiota_lab/final_results.RData")
-
-
-# write.xlsx(list(table_2b = table_2b,
-#                 table_3_boots = table_3_boots,
-#                 table_3_boots_bis = table_3_boots_bis,
-#                 table_4_boots = table_4_boots,
-#                 additional_table_1_boots = additional_table_1_boots,
-#                 additional_table_1_boots_bis = additional_table_1_boots_bis,
-#                 additional_table_2_boots = additional_table_2_boots),
-#            "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/test_corrected_2023_09_26 (with bootsraping).xlsx")
-# 
-# write.xlsx(list(table_2b = table_2b,
-#                 table_3_boots = table_3_boots,
-#                 table_3_boots_bis = table_3_boots_bis,
-#                 table_4_boots = table_4_boots,
-#                 additional_table_1_boots = additional_table_1_boots,
-#                 additional_table_1_boots_bis = additional_table_1_boots_bis,
-#                 additional_table_2_boots = additional_table_2_boots),
-#            "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/test_corrected_2023_10_01 (with bootsraping).xlsx")
 ```
