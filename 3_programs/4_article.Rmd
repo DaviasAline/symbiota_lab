@@ -109,7 +109,9 @@ table_1 <- bdd %>%
               missing = "no", 
               digits = list(GA ~ 0, 
                             Mom_age ~ 0,
-                            BirthwtKg ~ 1)) %>%
+                            BirthwtKg ~ 1, 
+                            BFStatus3m ~ 1)) %>%
+  add_n() %>%
   bold_labels()
 ```
 
