@@ -2828,8 +2828,8 @@ bdd_figure_1_long <- bdd_figure_1_long %>%
                        #"Taurine",
                        "Lactate","Formate", "Tyrosine","Valerate"), 
     sIgA_3m_cat_CutOff5 = fct_recode(sIgA_3m_cat_CutOff5,
-                                     "≥5 ng/g feces" = ">=5 ng/dL", 
-                                     "<5 ng/g feces" = "<5 ng/dL"))
+                                     "≥5 mg/g feces" = ">=5 ng/dL", 
+                                     "<5 mg/g feces" = "<5 ng/dL"))
 
 
 figure_1_a <- bdd_figure_1_long %>%
@@ -2928,7 +2928,7 @@ figure_1 <-
 rm(bdd_figure_1_long, figure_1_a, figure_1_b, figure_1_c, legend)
 
 ggsave(plot = figure_1, 
-       filename = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/figures/article/figure_1.tiff",
+       filename = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/5. R projects/symbiota_lab/4_output/figure_1.tiff",
        units = "mm", 
        height = 250, 
        width = 300)
@@ -3147,7 +3147,7 @@ corrplot(figure_S3,
 # Figure S4
 Gut microbiota distribution at 12 months depending on secretory IgA level at 4 months of age 
 ```{r}
-bdd_figure_S3_long <- bdd_filtered %>%
+bdd_figure_S4_long <- bdd_filtered %>%
   select(ident, 
          sIgA_3m_cat_CutOff5, 
          p__Proteobacteria_Y1, 
@@ -3164,22 +3164,22 @@ bdd_figure_S3_long <- bdd_filtered %>%
          g__Enterococcus_Y1_ln,
          Cdiff_num_Y1_ln) 
 
-var_lab(bdd_figure_S3_long$p__Proteobacteria_Y1) <- NULL
-var_lab(bdd_figure_S3_long$p__Firmicutes_Y1) <- NULL
-var_lab(bdd_figure_S3_long$p__Bacteroidetes_Y1) <- NULL
-var_lab(bdd_figure_S3_long$p__Actinobacteria_Y1) <- NULL
-var_lab(bdd_figure_S3_long$g__Bacteroides_Y1) <- NULL
-var_lab(bdd_figure_S3_long$f__Lachnospiraceae_g___Y1) <- NULL
-var_lab(bdd_figure_S3_long$g__Bifidobacterium_Y1) <- NULL
-var_lab(bdd_figure_S3_long$g__Veillonella_Y1) <- NULL
-var_lab(bdd_figure_S3_long$g__Faecalibacterium_Y1) <- NULL
-var_lab(bdd_figure_S3_long$g__Streptococcus_Y1_ln) <- NULL
-var_lab(bdd_figure_S3_long$g__Lactobacillus_Y1_ln) <- NULL
-var_lab(bdd_figure_S3_long$g__Enterococcus_Y1_ln) <- NULL
-var_lab(bdd_figure_S3_long$Cdiff_num_Y1_ln) <- NULL
+var_lab(bdd_figure_S4_long$p__Proteobacteria_Y1) <- NULL
+var_lab(bdd_figure_S4_long$p__Firmicutes_Y1) <- NULL
+var_lab(bdd_figure_S4_long$p__Bacteroidetes_Y1) <- NULL
+var_lab(bdd_figure_S4_long$p__Actinobacteria_Y1) <- NULL
+var_lab(bdd_figure_S4_long$g__Bacteroides_Y1) <- NULL
+var_lab(bdd_figure_S4_long$f__Lachnospiraceae_g___Y1) <- NULL
+var_lab(bdd_figure_S4_long$g__Bifidobacterium_Y1) <- NULL
+var_lab(bdd_figure_S4_long$g__Veillonella_Y1) <- NULL
+var_lab(bdd_figure_S4_long$g__Faecalibacterium_Y1) <- NULL
+var_lab(bdd_figure_S4_long$g__Streptococcus_Y1_ln) <- NULL
+var_lab(bdd_figure_S4_long$g__Lactobacillus_Y1_ln) <- NULL
+var_lab(bdd_figure_S4_long$g__Enterococcus_Y1_ln) <- NULL
+var_lab(bdd_figure_S4_long$Cdiff_num_Y1_ln) <- NULL
 
 
-bdd_figure_S3_long <- bdd_figure_S3_long %>%
+bdd_figure_S4_long <- bdd_figure_S4_long %>%
   rename("Proteobacteria" = p__Proteobacteria_Y1,
          "Firmicutes" = p__Firmicutes_Y1, 
          "Bacteroidetes" = p__Bacteroidetes_Y1, 
@@ -3201,10 +3201,11 @@ bdd_figure_S3_long <- bdd_figure_S3_long %>%
     "Bacteroides", "Proteobacteria", "Actinobacteria",
     "Bacteroidetes", "Firmicutes"),
     sIgA_3m_cat_CutOff5 = fct_recode(sIgA_3m_cat_CutOff5,
-                                     "≥5 ng/dL" = ">=5 ng/dL"))
+                                     "≥5 mg/g" = ">=5 ng/dL", 
+                                     "<5 mg/g" = "<5 ng/dL"))
 
 
-figure_S3_a <- bdd_figure_S3_long %>%
+figure_S4_a <- bdd_figure_S4_long %>%
  filter(name %in% c("Proteobacteria", 
                     "Firmicutes",
                     "Bacteroidetes",  
@@ -3231,7 +3232,7 @@ figure_S3_a <- bdd_figure_S3_long %>%
     axis.text = element_text(size = 12L), 
     legend.position = "none")
 
-figure_S3_b <- bdd_figure_S3_long %>%
+figure_S4_b <- bdd_figure_S4_long %>%
  filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostridium difficile")) %>%
  ggplot() +
   aes(x = value, y = name, fill = sIgA_3m_cat_CutOff5) +
@@ -3252,12 +3253,12 @@ figure_S3_b <- bdd_figure_S3_long %>%
     legend.title = element_text(size = 12L),
     legend.position = "bottom")
 
-figure_S3 <- figure_S3_a + figure_S3_b + plot_layout(ncol = 1, heights = c(2, 1))
+figure_S4 <- figure_S4_a + figure_S4_b + plot_layout(ncol = 1, heights = c(2, 1))
 
-rm(figure_S3_a, figure_S3_b, bdd_figure_S3_long)
+rm(figure_S4_a, figure_S4_b, bdd_figure_S4_long)
 
-ggsave(plot = figure_S3, 
-       filename = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/figures/article/figure_S3.tiff", 
+ggsave(plot = figure_S4, 
+       filename = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/5. R projects/symbiota_lab/4_output/figure_S4.tiff", 
        units = "mm", 
        height = 200, 
        width = 300)
