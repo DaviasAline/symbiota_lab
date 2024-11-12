@@ -118,6 +118,48 @@ table_1 <- bdd %>%
 # Table 2 
 Adjusted associations between gut microbiota at 3–4 months and Bayley cognitive scores at 12 and 24 months of age.
 ```{r}
+# direct path C : GM 3M --> neuro ----
+prep_path_c <- list()
+
+# Boucle sur les outcomes
+for (outcome in outcomes) {
+  # Initialisation de la liste pour cet outcome
+  liste_tbl_regressions <- list()
+  
+  # Boucle sur les variables explicatives
+  for (explanatory_var in explanatory_vars) {
+    # Construction du modèle
+    formule <- as.formula(paste(outcome, "~", explanatory_var, "+ Sex + GA + Birthmode_2cat + BFStatus3m"))
+    modele <- lm(formule, data = bdd_direct_paths)
+    
+    # Ajout du résultat à la liste pour cet outcome
+    liste_tbl_regressions[[explanatory_var]] <- 
+      tbl_regression(modele, 
+                     include = explanatory_var, 
+                     estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+                     pvalue_fun = custom_pvalue_fun) %>%
+      add_n() %>%
+      add_global_p(keep = FALSE) %>%
+      bold_labels() %>%
+      bold_p() %>% 
+      add_glance_table(include = r.squared)
+  }
+  
+  prep_path_c[[outcome]] <- liste_tbl_regressions
+}
+
+
+path_c <- vector("list", length = 35)  
+for(i in 1:35) {
+  path_c[[i]] <- tbl_merge(
+    tbls = list(prep_path_c$BAYLEYQ4_3_12[[i]], prep_path_c$BAYLEYQ4_3_24[[i]]),
+    tab_spanner = c("**Bayley cognitive score at 1 year**", "**Bayley cognitive score at 2 years**")) %>%
+    modify_table_body(~.x %>% arrange(row_type == "glance_statistic"))
+}
+
+path_c <- tbl_stack(path_c)  
+rm(liste_tbl_regressions, prep_path_c)
+path_c
 
 ```
 
@@ -1688,6 +1730,112 @@ rm(fit_crude_Valerate_3M_bayley_Y1_bis,
 rm(mediation, nettoyage)
 ```
 
+## Assemblage
+```{r}
+table_2_boots  <- bind_rows(
+  
+  table_article_Clusters_Hein_3M_bis,
+  table_article_Proteobacteria_3M_bis, 
+  table_article_Firmicutes_3M_bis, 
+  table_article_Bacteroidetes_3M_bis, 
+  table_article_Actinobacteria_3M_bis, 
+  
+  table_article_Enterobacteriaceae_g__3M_bis,
+  table_article_Bacteroides_3M_bis, 
+  table_article_Bifidobacterium_3M_bis, 
+  table_article_Veillonella_3M_bis,
+  
+  table_article_Streptococcus_3M_bis, 
+  table_article_Lactobacillus_3M_bis, 
+  table_article_Enterococcus_3M_bis, 
+  
+  table_article_Cdiff_num_3M_bis, 
+  table_article_Cdiff_cat_3M_bis, 
+  
+  table_article_Acetate_3M_bis, 
+  table_article_Propionate_3M_bis, 
+  table_article_Butyrate_3M_bis, 
+  
+  table_article_Tryptophan_3M_bis, 
+  table_article_Taurine_3M_bis, 
+  table_article_Lactate_3M_bis, 
+  table_article_Formate_3M_bis, 
+  
+  table_article_Tyrosine_3M_bis, 
+  table_article_Valerate_3M_bis
+  ) %>%
+  
+  mutate(
+    figures_Y1 = paste(`Est Y1`, " (", `CI Y1`, ") p=", `p-value Y1`, sep = ""), 
+    figures_Y2 = paste(`Est Y2`, " (", `CI Y2`, ") p=", `p-value Y2`, sep = ""), 
+    `CI Y1` = ifelse(`CI Y1` == "NA, NA", "", `CI Y1`), 
+    `CI Y2` = ifelse(`CI Y2` == "NA, NA", "", `CI Y2`), 
+    figures_Y1 = ifelse(figures_Y1 == "NA (NA, NA) p=NA", "", figures_Y1), 
+    figures_Y2 = ifelse(figures_Y2 == "NA (NA, NA) p=NA", "", figures_Y2)) 
+
+
+table_2_boots_list <- list(
+  table_article_Clusters_Hein_3M_bis = table_article_Clusters_Hein_3M_bis,
+  table_article_Proteobacteria_3M_bis = table_article_Proteobacteria_3M_bis,
+  table_article_Firmicutes_3M_bis = table_article_Firmicutes_3M_bis,
+  table_article_Bacteroidetes_3M_bis = table_article_Bacteroidetes_3M_bis,
+  table_article_Actinobacteria_3M_bis = table_article_Actinobacteria_3M_bis,
+  
+  table_article_Enterobacteriaceae_g__3M_bis = table_article_Enterobacteriaceae_g__3M_bis,
+  table_article_Bacteroides_3M_bis = table_article_Bacteroides_3M_bis,
+  table_article_Bifidobacterium_3M_bis = table_article_Bifidobacterium_3M_bis,
+  table_article_Veillonella_3M_bis = table_article_Veillonella_3M_bis,
+  
+  table_article_Streptococcus_3M_bis = table_article_Streptococcus_3M_bis,
+  table_article_Lactobacillus_3M_bis = table_article_Lactobacillus_3M_bis,
+  table_article_Enterococcus_3M_bis = table_article_Enterococcus_3M_bis,
+  
+  table_article_Cdiff_num_3M_bis = table_article_Cdiff_num_3M_bis,
+  table_article_Cdiff_cat_3M_bis = table_article_Cdiff_cat_3M_bis,
+  
+  table_article_Acetate_3M_bis = table_article_Acetate_3M_bis,
+  table_article_Propionate_3M_bis = table_article_Propionate_3M_bis,
+  table_article_Butyrate_3M_bis = table_article_Butyrate_3M_bis,
+  
+  table_article_Tryptophan_3M_bis = table_article_Tryptophan_3M_bis,
+  table_article_Taurine_3M_bis = table_article_Taurine_3M_bis,
+  table_article_Lactate_3M_bis = table_article_Lactate_3M_bis,
+  table_article_Formate_3M_bis = table_article_Formate_3M_bis,
+  
+  table_article_Tyrosine_3M_bis = table_article_Tyrosine_3M_bis,
+  table_article_Valerate_3M_bis = table_article_Valerate_3M_bis
+)
+
+rm(table_article_Clusters_Hein_3M_bis,
+  table_article_Proteobacteria_3M_bis, 
+  table_article_Firmicutes_3M_bis, 
+  table_article_Bacteroidetes_3M_bis, 
+  table_article_Actinobacteria_3M_bis, 
+  
+  table_article_Enterobacteriaceae_g__3M_bis,
+  table_article_Bacteroides_3M_bis, 
+  table_article_Bifidobacterium_3M_bis, 
+  table_article_Veillonella_3M_bis,
+  
+  table_article_Streptococcus_3M_bis, 
+  table_article_Lactobacillus_3M_bis, 
+  table_article_Enterococcus_3M_bis, 
+  
+  table_article_Cdiff_num_3M_bis, 
+  table_article_Cdiff_cat_3M_bis, 
+  
+  table_article_Acetate_3M_bis, 
+  table_article_Propionate_3M_bis, 
+  table_article_Butyrate_3M_bis, 
+  
+  table_article_Tryptophan_3M_bis, 
+  table_article_Taurine_3M_bis, 
+  table_article_Lactate_3M_bis, 
+  table_article_Formate_3M_bis, 
+  
+  table_article_Tyrosine_3M_bis, 
+  table_article_Valerate_3M_bis)
+```
 
 # Table 4
 Relation between sIgA level at 4 months and the Bayley cognitive scores at 12 and 24 months, mediated by the gut microbiota at 12 months (n=170 and 154 respectively).
@@ -2739,6 +2887,75 @@ rm(fit_crude_Cdiff_cat_Y1_bayley_Y1,
 rm(mediation, nettoyage)
 ```
 
+## Assemblage
+```{r}
+table_3_boots  <- bind_rows(
+  
+  table_article_Clusters_Y1,
+  table_article_Proteobacteria_Y1, 
+  table_article_Firmicutes_Y1, 
+  table_article_Bacteroidetes_Y1, 
+  table_article_Actinobacteria_Y1, 
+  table_article_Cdiff_num_Y1, 
+  table_article_Cdiff_cat_Y1, 
+  
+  table_article_Bacteroides_Y1,
+  table_article_Lachnospiraceae_g_Y1, 
+  table_article_Bifidobacterium_Y1, 
+  table_article_Veillonella_Y1, 
+  table_article_Faecalibacterium_Y1, 
+  
+  table_article_Streptococcus_Y1, 
+  table_article_Lactobacillus_Y1, 
+  table_article_Enterococcus_Y1) %>%
+  
+  mutate(
+    figures_Y1 = paste(`Est Y1`, " (", `CI Y1`, ") p=", `p-value Y1`, sep = ""), 
+    figures_Y2 = paste(`Est Y2`, " (", `CI Y2`, ") p=", `p-value Y2`, sep = ""), 
+    `CI Y1` = ifelse(`CI Y1` == "NA, NA", "", `CI Y1`), 
+    `CI Y2` = ifelse(`CI Y2` == "NA, NA", "", `CI Y2`), 
+    figures_Y1 = ifelse(figures_Y1 == "NA (NA, NA) p=NA", "", figures_Y1), 
+    figures_Y2 = ifelse(figures_Y2 == "NA (NA, NA) p=NA", "", figures_Y2)) 
+
+table_3_boots_list <- list(
+  table_article_Clusters_Y1 = table_article_Clusters_Y1,
+  table_article_Proteobacteria_Y1 = table_article_Proteobacteria_Y1,
+  table_article_Firmicutes_Y1 = table_article_Firmicutes_Y1,
+  table_article_Bacteroidetes_Y1 = table_article_Bacteroidetes_Y1,
+  table_article_Actinobacteria_Y1 = table_article_Actinobacteria_Y1,
+  table_article_Cdiff_num_Y1 = table_article_Cdiff_num_Y1,
+  table_article_Cdiff_cat_Y1 = table_article_Cdiff_cat_Y1,
+  
+  table_article_Bacteroides_Y1 = table_article_Bacteroides_Y1,
+  table_article_Lachnospiraceae_g_Y1 = table_article_Lachnospiraceae_g_Y1,
+  table_article_Bifidobacterium_Y1 = table_article_Bifidobacterium_Y1,
+  table_article_Veillonella_Y1 = table_article_Veillonella_Y1,
+  table_article_Faecalibacterium_Y1 = table_article_Faecalibacterium_Y1,
+  
+  table_article_Streptococcus_Y1 = table_article_Streptococcus_Y1,
+  table_article_Lactobacillus_Y1 = table_article_Lactobacillus_Y1,
+  table_article_Enterococcus_Y1 = table_article_Enterococcus_Y1
+)
+
+rm(table_article_Clusters_Y1,
+  table_article_Proteobacteria_Y1, 
+  table_article_Firmicutes_Y1, 
+  table_article_Bacteroidetes_Y1, 
+  table_article_Actinobacteria_Y1, 
+  table_article_Cdiff_num_Y1, 
+  table_article_Cdiff_cat_Y1, 
+  
+  table_article_Bacteroides_Y1,
+  table_article_Lachnospiraceae_g_Y1, 
+  table_article_Bifidobacterium_Y1, 
+  table_article_Veillonella_Y1, 
+  table_article_Faecalibacterium_Y1, 
+  
+  table_article_Streptococcus_Y1, 
+  table_article_Lactobacillus_Y1, 
+  table_article_Enterococcus_Y1)
+```
+
 # Figure 1
 Gut microbiota distribution at 4 months depending on secretory IgA level at 4 months of age 
 ```{r}
@@ -2943,8 +3160,219 @@ ggsave(plot = figure_1,
 
 # Figure 2
 Mediation main results
-```{r}
 
+
+# Table S1
+Description of the sIgA level at 3 months of age, the gut microbiota at 3 and 12 months of age and the Bayley cognitive scale at 12 and 24 months of age in the children from the Canadian CHILD study cohort.
+```{r}
+table_S1.1 <- descrip_num(
+  data = bdd_filtered, 
+  vars = c("sIgA_3m",
+         "BAYLEYQ4_3_12",
+         "BAYLEYQ4_3_24",
+         
+         "p__Proteobacteria_3M",  
+         "p__Firmicutes_3M",
+         "p__Bacteroidetes_3M",
+         "p__Actinobacteria_3M",
+         
+         "f__Enterobacteriaceae_g__3M",
+         "g__Bacteroides_3M", 
+         "g__Bifidobacterium_3M",
+         "g__Veillonella_3M", 
+         
+         "g__Streptococcus_3M",
+         "g__Lactobacillus_3M",          
+         "g__Enterococcus_3M",
+         
+         "Cdiff_num_3M",
+         
+         "metabolite_Acetate", 
+         "metabolite_Propionate", 
+         "metabolite_Butyrate", 
+         "metabolite_Tryptophan", 
+         "metabolite_Taurine",
+         "metabolite_Lactate",
+         "metabolite_Formate",
+         
+         "p__Proteobacteria_Y1",  
+         "p__Firmicutes_Y1",
+         "p__Bacteroidetes_Y1",
+         "p__Actinobacteria_Y1", 
+         
+         "g__Bacteroides_Y1",
+         "f__Lachnospiraceae_g___Y1",
+         "g__Bifidobacterium_Y1",
+         "g__Veillonella_Y1",
+         "g__Faecalibacterium_Y1",
+         
+         "g__Lactobacillus_Y1", 
+         "g__Enterococcus_Y1", 
+         "g__Streptococcus_Y1", 
+         
+         "Cdiff_num_Y1")) %>% 
+  select(-`Variable names`)
+
+table_S1.2 <- bdd %>%
+  filter(!is.na(BAYLEYQ4_3_12) & !is.na(sIgA_3m )& !is.na(Clusters_Hein_3M))%>%
+  select(Clusters_Hein_3M, 
+         Cdiff_cat_3M, 
+         Clusters_Hein_Y1, 
+         Cdiff_cat_Y1)  %>% 
+  tbl_summary(missing = "no", 
+              type = list(Cdiff_cat_3M ~ "categorical", 
+                          Cdiff_cat_Y1 ~ "categorical")) %>%
+  bold_labels()
+
+#write.xlsx(table_2b, file = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/table_2b.xlsx")
+```
+
+# Table S2
+Associations between gut microbiota taxa and bacterial metabolites at 3–4 months and SIgA at 3–4 months.
+```{r}
+# direct path A : GM 3M --> sIgA ----
+## version régression logistique ----
+logistic_reg <- function(explanatory_var) {
+  results <- tbl_regression(
+    glm(sIgA_3m_cat_CutOff5 ~ explanatory_var, data = bdd_direct_paths, family = binomial(logit)), 
+    exponentiate = TRUE, 
+    estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+    pvalue_fun = custom_pvalue_fun) %>%
+    bold_labels() %>%
+    bold_p(t=0.1) %>%
+    add_n() %>%
+    add_global_p(keep = TRUE) 
+  return(results)
+} 
+
+
+path_a_logistic <- tbl_stack(
+  tbls = list(
+    logistic_reg(bdd_direct_paths$Clusters_Hein_3M), 
+    logistic_reg(bdd_direct_paths$p__Proteobacteria_3M_ln), 
+    logistic_reg(bdd_direct_paths$p__Firmicutes_3M_ln),
+    logistic_reg(bdd_direct_paths$p__Bacteroidetes_3M_cat3),
+    logistic_reg(bdd_direct_paths$p__Actinobacteria_3M_ln),
+    logistic_reg(bdd_direct_paths$f__Enterobacteriaceae_g__3M_ln),
+    logistic_reg(bdd_direct_paths$g__Bacteroides_3M_cat3),
+    logistic_reg(bdd_direct_paths$g__Bifidobacterium_3M_ln), 
+    logistic_reg(bdd_direct_paths$g__Veillonella_3M_ln),       
+    logistic_reg(bdd_direct_paths$g__Streptococcus_3M_ln),
+    logistic_reg(bdd_direct_paths$g__Lactobacillus_3M_cat),
+    logistic_reg(bdd_direct_paths$g__Enterococcus_3M_cat),
+    logistic_reg(bdd_direct_paths$Cdiff_num_3M_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Acetate_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Propionate_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Butyrate_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Tryptophan_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Lactate_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Formate_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Tyrosine_ln),
+    logistic_reg(bdd_direct_paths$metabolite_Valerate_ln)))
+
+path_a_logistic
+
+## version régression linéaire ----
+linear_reg <- function(explanatory_var) {
+  results <- 
+    tbl_regression(
+      lm(sIgA_3m_ln ~ explanatory_var, 
+         data = bdd_direct_paths), 
+      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+      pvalue_fun = custom_pvalue_fun) %>%
+    bold_labels() %>%
+    bold_p(t=0.1) %>%
+    add_n() %>%
+    add_global_p(keep = TRUE) %>%
+    add_glance_table(include = r.squared)
+  
+  return(results)
+} 
+
+path_a_linear <- tbl_stack(
+  tbls = list(
+    linear_reg(bdd_direct_paths$Clusters_Hein_3M), 
+    linear_reg(bdd_direct_paths$p__Proteobacteria_3M_ln), 
+    linear_reg(bdd_direct_paths$p__Firmicutes_3M_ln),
+    linear_reg(bdd_direct_paths$p__Bacteroidetes_3M_cat3),
+    linear_reg(bdd_direct_paths$p__Actinobacteria_3M_ln),
+    linear_reg(bdd_direct_paths$f__Enterobacteriaceae_g__3M_ln),
+    linear_reg(bdd_direct_paths$g__Bacteroides_3M_cat3),
+    linear_reg(bdd_direct_paths$g__Bifidobacterium_3M_ln), 
+    linear_reg(bdd_direct_paths$g__Veillonella_3M_ln),       
+    linear_reg(bdd_direct_paths$g__Streptococcus_3M_ln),
+    linear_reg(bdd_direct_paths$g__Lactobacillus_3M_cat),
+    linear_reg(bdd_direct_paths$g__Enterococcus_3M_cat),
+    linear_reg(bdd_direct_paths$Cdiff_num_3M_ln),
+    linear_reg(bdd_direct_paths$metabolite_Acetate_ln),
+    linear_reg(bdd_direct_paths$metabolite_Propionate_ln),
+    linear_reg(bdd_direct_paths$metabolite_Butyrate_ln),
+    linear_reg(bdd_direct_paths$metabolite_Tryptophan_ln),
+    linear_reg(bdd_direct_paths$metabolite_Lactate_ln),
+    linear_reg(bdd_direct_paths$metabolite_Formate_ln),
+    linear_reg(bdd_direct_paths$metabolite_Tyrosine_ln),
+    linear_reg(bdd_direct_paths$metabolite_Valerate_ln)))
+
+```
+
+# Table S3 
+Associations between SIgA at 3–4 months Bayley cognitive scores at 12 and 24 months of age.
+```{r}
+# direct path B : sIgA --> neuro ----
+path_b <- tbl_merge(
+  tbls = list(
+    tbl_regression(lm(BAYLEYQ4_3_12 ~ sIgA_3m_ln, data = bdd_filtered), 
+                   estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+                   pvalue_fun = custom_pvalue_fun) %>%
+      bold_labels() %>%
+      bold_p(t=0.1) %>%
+      add_n() %>%
+      add_glance_table(include = r.squared),
+    tbl_regression(lm(BAYLEYQ4_3_24 ~ sIgA_3m_ln, data = bdd_filtered), 
+                   estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+                   pvalue_fun = custom_pvalue_fun) %>%
+      bold_labels() %>%
+      bold_p(t=0.1) %>%
+      add_n()%>%
+      add_glance_table(include = r.squared)),
+  c("**Bayley cognitive score at 1 year**", "**Bayley cognitive score at 2 years**"))
+path_b
+
+
+```
+
+# Table S4
+```{r}
+# Effects des covariables (table S4)----
+effet_covar <- tbl_merge(
+  tbls = list(
+    tbl_regression(
+      lm(sIgA_3m_ln ~ Sex + GA + Birthmode_2cat + BFStatus3m, data = bdd_direct_paths), 
+      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+      pvalue_fun = custom_pvalue_fun) %>%
+      add_global_p() %>%
+      add_n() %>%
+      bold_labels() %>%
+      bold_p(), 
+    tbl_regression(
+      lm(BAYLEYQ4_3_12 ~ Sex + GA + Birthmode_2cat + BFStatus3m, data = bdd_direct_paths), 
+      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+      pvalue_fun = custom_pvalue_fun) %>%
+      add_global_p() %>%
+      add_n() %>%
+      bold_labels() %>%
+      bold_p(), 
+    tbl_regression(
+      lm(BAYLEYQ4_3_24 ~ Sex + GA + Birthmode_2cat + BFStatus3m, data = bdd_direct_paths), 
+      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+      pvalue_fun = custom_pvalue_fun) %>%
+      add_global_p() %>%
+      add_n() %>%
+      bold_labels() %>%
+      bold_p()), 
+  tab_spanner = c("**SIgA at 3-4 months (mg/g feces)**", 
+                  "**Bayley cognitive score at 12 months**", 
+                  "**Bayley cognitive score at 24 months**"))
 ```
 
 # Figure S1
@@ -3272,248 +3700,6 @@ ggsave(plot = figure_S4,
 ```
 
 
-# Table S1
-Description of the sIgA level at 3 months of age, the gut microbiota at 3 and 12 months of age and the Bayley cognitive scale at 12 and 24 months of age in the children from the Canadian CHILD study cohort.
-```{r}
-table_S1.1 <- descrip_num(
-  data = bdd_filtered, 
-  vars = c("sIgA_3m",
-         "BAYLEYQ4_3_12",
-         "BAYLEYQ4_3_24",
-         
-         "p__Proteobacteria_3M",  
-         "p__Firmicutes_3M",
-         "p__Bacteroidetes_3M",
-         "p__Actinobacteria_3M",
-         
-         "f__Enterobacteriaceae_g__3M",
-         "g__Bacteroides_3M", 
-         "g__Bifidobacterium_3M",
-         "g__Veillonella_3M", 
-         
-         "g__Streptococcus_3M",
-         "g__Lactobacillus_3M",          
-         "g__Enterococcus_3M",
-         
-         "Cdiff_num_3M",
-         
-         "metabolite_Acetate", 
-         "metabolite_Propionate", 
-         "metabolite_Butyrate", 
-         "metabolite_Tryptophan", 
-         "metabolite_Taurine",
-         "metabolite_Lactate",
-         "metabolite_Formate",
-         
-         "p__Proteobacteria_Y1",  
-         "p__Firmicutes_Y1",
-         "p__Bacteroidetes_Y1",
-         "p__Actinobacteria_Y1", 
-         
-         "g__Bacteroides_Y1",
-         "f__Lachnospiraceae_g___Y1",
-         "g__Bifidobacterium_Y1",
-         "g__Veillonella_Y1",
-         "g__Faecalibacterium_Y1",
-         
-         "g__Lactobacillus_Y1", 
-         "g__Enterococcus_Y1", 
-         "g__Streptococcus_Y1", 
-         
-         "Cdiff_num_Y1")) %>% 
-  select(-`Variable names`)
-
-table_S1.2 <- bdd %>%
-  filter(!is.na(BAYLEYQ4_3_12) & !is.na(sIgA_3m )& !is.na(Clusters_Hein_3M))%>%
-  select(Clusters_Hein_3M, 
-         Cdiff_cat_3M, 
-         Clusters_Hein_Y1, 
-         Cdiff_cat_Y1)  %>% 
-  tbl_summary(missing = "no", 
-              type = list(Cdiff_cat_3M ~ "categorical", 
-                          Cdiff_cat_Y1 ~ "categorical")) %>%
-  bold_labels()
-
-#write.xlsx(table_2b, file = "C:/Users/Aline/OneDrive - etu.univ-grenoble-alpes.fr/Documents/10. Symbiota lab project/table_2b.xlsx")
-```
-
-
-# Assemblage
-## table 3
-```{r}
-table_2_boots  <- bind_rows(
-  
-  table_article_Clusters_Hein_3M_bis,
-  table_article_Proteobacteria_3M_bis, 
-  table_article_Firmicutes_3M_bis, 
-  table_article_Bacteroidetes_3M_bis, 
-  table_article_Actinobacteria_3M_bis, 
-  
-  table_article_Enterobacteriaceae_g__3M_bis,
-  table_article_Bacteroides_3M_bis, 
-  table_article_Bifidobacterium_3M_bis, 
-  table_article_Veillonella_3M_bis,
-  
-  table_article_Streptococcus_3M_bis, 
-  table_article_Lactobacillus_3M_bis, 
-  table_article_Enterococcus_3M_bis, 
-  
-  table_article_Cdiff_num_3M_bis, 
-  table_article_Cdiff_cat_3M_bis, 
-  
-  table_article_Acetate_3M_bis, 
-  table_article_Propionate_3M_bis, 
-  table_article_Butyrate_3M_bis, 
-  
-  table_article_Tryptophan_3M_bis, 
-  table_article_Taurine_3M_bis, 
-  table_article_Lactate_3M_bis, 
-  table_article_Formate_3M_bis, 
-  
-  table_article_Tyrosine_3M_bis, 
-  table_article_Valerate_3M_bis
-  ) %>%
-  
-  mutate(
-    figures_Y1 = paste(`Est Y1`, " (", `CI Y1`, ") p=", `p-value Y1`, sep = ""), 
-    figures_Y2 = paste(`Est Y2`, " (", `CI Y2`, ") p=", `p-value Y2`, sep = ""), 
-    `CI Y1` = ifelse(`CI Y1` == "NA, NA", "", `CI Y1`), 
-    `CI Y2` = ifelse(`CI Y2` == "NA, NA", "", `CI Y2`), 
-    figures_Y1 = ifelse(figures_Y1 == "NA (NA, NA) p=NA", "", figures_Y1), 
-    figures_Y2 = ifelse(figures_Y2 == "NA (NA, NA) p=NA", "", figures_Y2)) 
-
-
-table_2_boots_list <- list(
-  table_article_Clusters_Hein_3M_bis = table_article_Clusters_Hein_3M_bis,
-  table_article_Proteobacteria_3M_bis = table_article_Proteobacteria_3M_bis,
-  table_article_Firmicutes_3M_bis = table_article_Firmicutes_3M_bis,
-  table_article_Bacteroidetes_3M_bis = table_article_Bacteroidetes_3M_bis,
-  table_article_Actinobacteria_3M_bis = table_article_Actinobacteria_3M_bis,
-  
-  table_article_Enterobacteriaceae_g__3M_bis = table_article_Enterobacteriaceae_g__3M_bis,
-  table_article_Bacteroides_3M_bis = table_article_Bacteroides_3M_bis,
-  table_article_Bifidobacterium_3M_bis = table_article_Bifidobacterium_3M_bis,
-  table_article_Veillonella_3M_bis = table_article_Veillonella_3M_bis,
-  
-  table_article_Streptococcus_3M_bis = table_article_Streptococcus_3M_bis,
-  table_article_Lactobacillus_3M_bis = table_article_Lactobacillus_3M_bis,
-  table_article_Enterococcus_3M_bis = table_article_Enterococcus_3M_bis,
-  
-  table_article_Cdiff_num_3M_bis = table_article_Cdiff_num_3M_bis,
-  table_article_Cdiff_cat_3M_bis = table_article_Cdiff_cat_3M_bis,
-  
-  table_article_Acetate_3M_bis = table_article_Acetate_3M_bis,
-  table_article_Propionate_3M_bis = table_article_Propionate_3M_bis,
-  table_article_Butyrate_3M_bis = table_article_Butyrate_3M_bis,
-  
-  table_article_Tryptophan_3M_bis = table_article_Tryptophan_3M_bis,
-  table_article_Taurine_3M_bis = table_article_Taurine_3M_bis,
-  table_article_Lactate_3M_bis = table_article_Lactate_3M_bis,
-  table_article_Formate_3M_bis = table_article_Formate_3M_bis,
-  
-  table_article_Tyrosine_3M_bis = table_article_Tyrosine_3M_bis,
-  table_article_Valerate_3M_bis = table_article_Valerate_3M_bis
-)
-
-rm(table_article_Clusters_Hein_3M_bis,
-  table_article_Proteobacteria_3M_bis, 
-  table_article_Firmicutes_3M_bis, 
-  table_article_Bacteroidetes_3M_bis, 
-  table_article_Actinobacteria_3M_bis, 
-  
-  table_article_Enterobacteriaceae_g__3M_bis,
-  table_article_Bacteroides_3M_bis, 
-  table_article_Bifidobacterium_3M_bis, 
-  table_article_Veillonella_3M_bis,
-  
-  table_article_Streptococcus_3M_bis, 
-  table_article_Lactobacillus_3M_bis, 
-  table_article_Enterococcus_3M_bis, 
-  
-  table_article_Cdiff_num_3M_bis, 
-  table_article_Cdiff_cat_3M_bis, 
-  
-  table_article_Acetate_3M_bis, 
-  table_article_Propionate_3M_bis, 
-  table_article_Butyrate_3M_bis, 
-  
-  table_article_Tryptophan_3M_bis, 
-  table_article_Taurine_3M_bis, 
-  table_article_Lactate_3M_bis, 
-  table_article_Formate_3M_bis, 
-  
-  table_article_Tyrosine_3M_bis, 
-  table_article_Valerate_3M_bis)
-```
-
-## table 4
-```{r}
-table_3_boots  <- bind_rows(
-  
-  table_article_Clusters_Y1,
-  table_article_Proteobacteria_Y1, 
-  table_article_Firmicutes_Y1, 
-  table_article_Bacteroidetes_Y1, 
-  table_article_Actinobacteria_Y1, 
-  table_article_Cdiff_num_Y1, 
-  table_article_Cdiff_cat_Y1, 
-  
-  table_article_Bacteroides_Y1,
-  table_article_Lachnospiraceae_g_Y1, 
-  table_article_Bifidobacterium_Y1, 
-  table_article_Veillonella_Y1, 
-  table_article_Faecalibacterium_Y1, 
-  
-  table_article_Streptococcus_Y1, 
-  table_article_Lactobacillus_Y1, 
-  table_article_Enterococcus_Y1) %>%
-  
-  mutate(
-    figures_Y1 = paste(`Est Y1`, " (", `CI Y1`, ") p=", `p-value Y1`, sep = ""), 
-    figures_Y2 = paste(`Est Y2`, " (", `CI Y2`, ") p=", `p-value Y2`, sep = ""), 
-    `CI Y1` = ifelse(`CI Y1` == "NA, NA", "", `CI Y1`), 
-    `CI Y2` = ifelse(`CI Y2` == "NA, NA", "", `CI Y2`), 
-    figures_Y1 = ifelse(figures_Y1 == "NA (NA, NA) p=NA", "", figures_Y1), 
-    figures_Y2 = ifelse(figures_Y2 == "NA (NA, NA) p=NA", "", figures_Y2)) 
-
-table_3_boots_list <- list(
-  table_article_Clusters_Y1 = table_article_Clusters_Y1,
-  table_article_Proteobacteria_Y1 = table_article_Proteobacteria_Y1,
-  table_article_Firmicutes_Y1 = table_article_Firmicutes_Y1,
-  table_article_Bacteroidetes_Y1 = table_article_Bacteroidetes_Y1,
-  table_article_Actinobacteria_Y1 = table_article_Actinobacteria_Y1,
-  table_article_Cdiff_num_Y1 = table_article_Cdiff_num_Y1,
-  table_article_Cdiff_cat_Y1 = table_article_Cdiff_cat_Y1,
-  
-  table_article_Bacteroides_Y1 = table_article_Bacteroides_Y1,
-  table_article_Lachnospiraceae_g_Y1 = table_article_Lachnospiraceae_g_Y1,
-  table_article_Bifidobacterium_Y1 = table_article_Bifidobacterium_Y1,
-  table_article_Veillonella_Y1 = table_article_Veillonella_Y1,
-  table_article_Faecalibacterium_Y1 = table_article_Faecalibacterium_Y1,
-  
-  table_article_Streptococcus_Y1 = table_article_Streptococcus_Y1,
-  table_article_Lactobacillus_Y1 = table_article_Lactobacillus_Y1,
-  table_article_Enterococcus_Y1 = table_article_Enterococcus_Y1
-)
-
-rm(table_article_Clusters_Y1,
-  table_article_Proteobacteria_Y1, 
-  table_article_Firmicutes_Y1, 
-  table_article_Bacteroidetes_Y1, 
-  table_article_Actinobacteria_Y1, 
-  table_article_Cdiff_num_Y1, 
-  table_article_Cdiff_cat_Y1, 
-  
-  table_article_Bacteroides_Y1,
-  table_article_Lachnospiraceae_g_Y1, 
-  table_article_Bifidobacterium_Y1, 
-  table_article_Veillonella_Y1, 
-  table_article_Faecalibacterium_Y1, 
-  
-  table_article_Streptococcus_Y1, 
-  table_article_Lactobacillus_Y1, 
-  table_article_Enterococcus_Y1)
-```
 
 # Export
 ```{r}
