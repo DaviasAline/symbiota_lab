@@ -106,7 +106,7 @@ path_a_logistic <- tbl_stack(
 
 path_a_logistic
 
-## version régression linéaire ----
+## version régression linéaire (table S2) ----
 linear_reg <- function(explanatory_var) {
   results <- 
     tbl_regression(
@@ -148,7 +148,7 @@ path_a_linear <- tbl_stack(
     linear_reg(bdd_direct_paths$metabolite_Valerate_ln)))
 
 
-# direct path B : sIgA --> neuro ----
+# direct path B : sIgA --> neuro (table S3) ----
 path_b <- tbl_merge(
   tbls = list(
     tbl_regression(lm(BAYLEYQ4_3_12 ~ sIgA_3m_ln, data = bdd_filtered), 
@@ -168,7 +168,7 @@ path_b <- tbl_merge(
   c("**Bayley cognitive score at 1 year**", "**Bayley cognitive score at 2 years**"))
 path_b
 
-# direct path C : GM 3M --> neuro ----
+# direct path C : GM 3M --> neuro (table 2) ----
 prep_path_c <- list()
 
 # Boucle sur les outcomes
@@ -212,7 +212,7 @@ rm(liste_tbl_regressions, prep_path_c)
 path_c
 
 
-# Effects des covariables ----
+# Effects des covariables (table S4)----
 effet_covar <- tbl_merge(
   tbls = list(
     tbl_regression(
