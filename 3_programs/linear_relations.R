@@ -216,7 +216,7 @@ path_c
 effet_covar <- tbl_merge(
   tbls = list(
     tbl_regression(
-      lm(BAYLEYQ4_3_12 ~ Sex + GA + Birthmode_2cat, data = bdd_direct_paths), 
+      lm(sIgA_3m_ln ~ Sex + GA + Birthmode_2cat + BFStatus3m, data = bdd_direct_paths), 
       estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
       pvalue_fun = custom_pvalue_fun) %>%
       add_global_p() %>%
@@ -224,11 +224,21 @@ effet_covar <- tbl_merge(
       bold_labels() %>%
       bold_p(), 
     tbl_regression(
-      lm(BAYLEYQ4_3_24 ~ Sex + GA + Birthmode_2cat, data = bdd_direct_paths), 
+      lm(BAYLEYQ4_3_12 ~ Sex + GA + Birthmode_2cat + BFStatus3m, data = bdd_direct_paths), 
+      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
+      pvalue_fun = custom_pvalue_fun) %>%
+      add_global_p() %>%
+      add_n() %>%
+      bold_labels() %>%
+      bold_p(), 
+    tbl_regression(
+      lm(BAYLEYQ4_3_24 ~ Sex + GA + Birthmode_2cat + BFStatus3m, data = bdd_direct_paths), 
       estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
       pvalue_fun = custom_pvalue_fun) %>%
       add_global_p() %>%
       add_n() %>%
       bold_labels() %>%
       bold_p()), 
-  tab_spanner = c("**Bayley cognitive score at 1 year**", "**Bayley cognitive score at 2 years**"))
+  tab_spanner = c("**SIgA at 3-4 months (mg/g feces)**", 
+                  "**Bayley cognitive score at 12 months**", 
+                  "**Bayley cognitive score at 24 months**"))
