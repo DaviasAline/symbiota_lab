@@ -115,7 +115,14 @@ table_1 <- bdd %>%
   bold_labels()
 ```
 
-# Table 2
+# Table 2 
+Adjusted associations between gut microbiota at 3–4 months and Bayley cognitive scores at 12 and 24 months of age.
+```{r}
+
+```
+
+
+# Table 3
 Relation between the gut microbiota at 4 months and the Bayley cognitive scores at 12 and 24 months, mediated by sIgA level at 4 months (n=178 and 163 respectively). 
 ## Functions 
 ```{r}
@@ -1682,7 +1689,7 @@ rm(mediation, nettoyage)
 ```
 
 
-# Table 3
+# Table 4
 Relation between sIgA level at 4 months and the Bayley cognitive scores at 12 and 24 months, mediated by the gut microbiota at 12 months (n=170 and 154 respectively).
 ## Fonctions
 ```{r}
