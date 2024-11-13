@@ -116,7 +116,7 @@ linear_reg <- function(explanatory_var) {
       pvalue_fun = custom_pvalue_fun) %>%
     bold_labels() %>%
     bold_p(t=0.1) %>%
-    add_n() %>%
+    add_n(location = "level") %>%
     add_global_p(keep = TRUE) %>%
     add_glance_table(include = r.squared)
   
@@ -188,7 +188,7 @@ for (outcome in outcomes) {
                      include = explanatory_var, 
                      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
                      pvalue_fun = custom_pvalue_fun) %>%
-      add_n() %>%
+      add_n(location = "level") %>%
       add_global_p(keep = FALSE) %>%
       bold_labels() %>%
       bold_p() %>% 
