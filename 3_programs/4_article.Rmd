@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 ```
 
 
-Chargement des données et des fonctions
+# Chargement des données et des fonctions
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 source("~/5. R projects/symbiota_lab/3_programs/0_source_data_reading_cleaning.R", echo=TRUE)
 source("~/5. R projects/symbiota_lab/3_programs/1_functions.R", echo=TRUE)
@@ -138,7 +138,7 @@ for (outcome in outcomes) {
                      include = explanatory_var, 
                      estimate_fun = scales::label_number(accuracy = .01, decimal.mark = "."),
                      pvalue_fun = custom_pvalue_fun) %>%
-      add_n() %>%
+      add_n(location = "level") %>%
       add_global_p(keep = FALSE) %>%
       bold_labels() %>%
       bold_p() %>% 
@@ -3021,7 +3021,7 @@ bdd_figure_1_long <- bdd_figure_1_long %>%
          "Streptococcus" = g__Streptococcus_3M_ln, 
          "Lactobacillus" = g__Lactobacillus_3M_ln, 
          "Enterococcus" = g__Enterococcus_3M_ln, 
-         "Clostridium difficile" = Cdiff_num_3M_ln, 
+         "Clostrioides difficile" = Cdiff_num_3M_ln, 
          "Acetate" = metabolite_Acetate_ln, 
          "Propionate" = metabolite_Propionate_ln, 
          "Butyrate" = metabolite_Butyrate_ln, 
@@ -3046,7 +3046,7 @@ bdd_figure_1_long <- bdd_figure_1_long %>%
                        "Streptococcus",
                        "Lactobacillus", 
                        "Enterococcus",
-                       "Clostridium difficile", 
+                       "Clostrioides difficile", 
                        
                        "Acetate","Propionate","Butyrate","Tryptophan",
                        #"Taurine",
@@ -3105,7 +3105,7 @@ figure_1_c <- bdd_figure_1_long %>%
     legend.position = "none")
 
 figure_1_b <- bdd_figure_1_long %>%
- filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostridium difficile")) %>%
+ filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostrioides difficile")) %>%
  ggplot() +
   aes(x = value, y = name, fill = sIgA_3m_cat_CutOff5) +
   geom_boxplot() +
@@ -3124,7 +3124,7 @@ figure_1_b <- bdd_figure_1_long %>%
     legend.position = "none")
 
 legend <- bdd_figure_1_long %>%
- filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostridium difficile")) %>%
+ filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostrioides difficile")) %>%
  ggplot() +
   aes(x = value, y = name, fill = sIgA_3m_cat_CutOff5) +
   geom_boxplot() +
@@ -3282,7 +3282,7 @@ linear_reg <- function(explanatory_var) {
       pvalue_fun = custom_pvalue_fun) %>%
     bold_labels() %>%
     bold_p(t=0.1) %>%
-    add_n() %>%
+    add_n(location = "level") %>%
     add_global_p(keep = TRUE) %>%
     add_glance_table(include = r.squared)
   
@@ -3627,11 +3627,11 @@ bdd_figure_S4_long <- bdd_figure_S4_long %>%
          "Streptococcus" = g__Streptococcus_Y1_ln, 
          "Lactobacillus" = g__Lactobacillus_Y1_ln, 
          "Enterococcus" = g__Enterococcus_Y1_ln, 
-         "Clostridium difficile" = Cdiff_num_Y1_ln) %>%
+         "Clostrioides difficile" = Cdiff_num_Y1_ln) %>%
   pivot_longer(cols = c(-sIgA_3m_cat_CutOff5, -ident))%>%
   mutate(
     name = fct_relevel(name,
-    "Clostridium difficile", "Enterococcus", "Lactobacillus", "Streptococcus",
+    "Clostrioides difficile", "Enterococcus", "Lactobacillus", "Streptococcus",
     "Veillonella", "Bifidobacterium", "Faecalibacterium", "Lachnospiraceae \n (unknown genus)",
     "Bacteroides", "Proteobacteria", "Actinobacteria",
     "Bacteroidetes", "Firmicutes"),
@@ -3668,7 +3668,7 @@ figure_S4_a <- bdd_figure_S4_long %>%
     legend.position = "none")
 
 figure_S4_b <- bdd_figure_S4_long %>%
- filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostridium difficile")) %>%
+ filter(name %in% c("Streptococcus", "Lactobacillus", "Enterococcus", "Clostrioides difficile")) %>%
  ggplot() +
   aes(x = value, y = name, fill = sIgA_3m_cat_CutOff5) +
   geom_boxplot() +
